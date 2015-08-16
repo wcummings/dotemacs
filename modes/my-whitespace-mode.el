@@ -1,7 +1,6 @@
 (require 'whitespace)
 
-(setq whitespace-line-column 120)
-(setq whitespace-style '(face tab-mark trailing))
+(setq whitespace-style '(face tab-mark lines-tail))
 (whitespace-mode t)
 
 (provide 'my-whitespace-mode)
