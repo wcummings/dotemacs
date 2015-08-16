@@ -27,7 +27,8 @@
 (defun my-erlang-mode-hook ()
   (local-set-key (kbd "C-x C-r") 'find-makefile-and-run)
   (projmake-mode)
-  (whitespace-mode t)
+  (require 'my-whitespace-mode)
+  (setq whitespace-line-column 120) 
   (projmake-search-load-project))  
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
