@@ -44,4 +44,9 @@
 
 (setq inhibit-startup-screen t)
 
+(global-set-key (kbd "C-x t") (lambda()
+			    (interactive)
+			    (term-line-mode)
+			    (ansi-term "/bin/bash")))
+
 (require 'my-erlang-mode)
