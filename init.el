@@ -49,4 +49,6 @@
 			    (term-line-mode)
 			    (ansi-term "/bin/bash")))
 
+(global-set-key (kbd "C-x e") 'eshell)
+
 (require 'my-erlang-mode)
