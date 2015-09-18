@@ -29,7 +29,8 @@
   (projmake-mode)
   (require 'my-whitespace-mode)
   (setq whitespace-line-column 120) 
-  (projmake-search-load-project))  
+  (projmake-search-load-project)
+  (require 'dumb-indent))
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 
