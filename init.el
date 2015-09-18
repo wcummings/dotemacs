@@ -4,7 +4,7 @@
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-(setq package-list '(magit projmake-mode))
+(setq package-list '(magit projmake-mode erlang))
 
 (package-initialize)
 (unless package-archive-contents
