@@ -51,10 +51,18 @@
 
 (global-set-key (kbd "C-x e") 'eshell)
 
+(setq more-paths '("/sbin" "/usr/sbin" "~/gocode/bin"))
+(setq more-paths-string (concat (mapconcat 'identity more-paths ":") ":"))
+
+(defun setup-path ()
+  (setq exec-path (append exec-path more-paths))
+  (setenv "PATH" (concat more-paths-string (getenv "PATH"))))
+
+(setup-path)
+
 (defun my-eshell-mode-hook ()
-  (let ((path "/sbin:/usr/sbin:~/gocode/bin:"))
-    (setq eshell-path-env (concat path eshell-path-env))
-    (setenv "PATH" (concat path (getenv "PATH")))))
+  (setq eshell-path-env (concat more-paths-string eshell-path-env))
+  (setup-path))
 
 (add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
 
