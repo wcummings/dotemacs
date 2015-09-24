@@ -51,4 +51,11 @@
 
 (global-set-key (kbd "C-x e") 'eshell)
 
+(defun my-eshell-mode-hook ()
+  (let ((path "/sbin:/usr/sbin:~/gocode/bin:"))
+    (setq eshell-path-env (concat path eshell-path-env))
+    (setenv "PATH" (concat path (getenv "PATH")))))
+
+(add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
+
 (require 'my-erlang-mode)
