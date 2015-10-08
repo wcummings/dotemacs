@@ -32,8 +32,9 @@
 (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
 
-;(setq linum-format "%4d \u2502 ")
-(global-linum-mode t)
+;;(setq linum-format "%4d \u2502 ")
+;;(global-linum-mode t)
+(require 'linum-mode)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
