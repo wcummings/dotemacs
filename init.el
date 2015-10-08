@@ -1,11 +1,14 @@
 (add-to-list 'load-path "~/.emacs.d/modes")
+(add-to-list 'load-path "~/.emacs.d/lib")
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-(setq package-list '(magit projmake-mode erlang))
-
+(setq package-list '(magit
+		     projmake-mode
+		     erlang
+		     skeletor))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -44,11 +47,12 @@
 
 (setq inhibit-startup-screen t)
 
-(global-set-key (kbd "C-x t") (lambda()
-			    (interactive)
-			    (term-line-mode)
-			    (ansi-term "/bin/bash")))
+(defun spawn-shell ()
+  (interactive)
+  (term-line-mode)
+  (ansi-term "/bin/bash"))
 
+(global-set-key (kbd "C-x t") 'spawn-shell)
 (global-set-key (kbd "C-x e") 'eshell)
 
 (setq more-paths '("/sbin" "/usr/sbin" "~/gocode/bin"))
@@ -67,3 +71,4 @@
 (add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
 
 (require 'my-erlang-mode)
+(require 'skeletons)
