@@ -1,5 +1,5 @@
 (setq skeletor-project-directory (expand-file-name "~/development"))
-(setq skeletor-user-directory (expand-file-name "~/.emacs.d/lib/skeletor"))
+(setq skeletor-user-directory (expand-file-name "~/.emacs.d/lib/skeletons"))
 (skeletor-define-template "nodejs"
   :title "Node.js Project"
   :after-creation
