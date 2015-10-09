@@ -1,0 +1,4 @@
+:name "__PROJECT-NAME__"
+:node-sname "__PROJECT-NAME__"
+:lib-dirs '("deps")
+:app-include-dirs '("include")

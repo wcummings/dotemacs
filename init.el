@@ -8,7 +8,9 @@
 (setq package-list '(magit
 		     projmake-mode
 		     erlang
-		     skeletor))
+		     skeletor
+		     js2-mode
+		     edts))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
