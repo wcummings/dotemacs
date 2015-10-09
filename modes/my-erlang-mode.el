@@ -2,10 +2,9 @@
 (setq repl-buffer "*Erlang release*")
 
 (require 'projmake-mode)
-(require 'dumb-indent)
-(add-to-list 'load-path (car (file-expand-wildcards "/usr/lib/erlang/lib/tools-*/emacs")))
-(setq erlang-root-dir "/usr/lib/erlang")
-(add-to-list 'exec-path "/usr/lib/erlang/bin")
+(add-to-list 'load-path (car (file-expand-wildcards "/usr/lib64/erlang/lib/tools-*/emacs")))
+(setq erlang-root-dir "/usr/lib64/erlang")
+(add-to-list 'exec-path "/usr/lib64/erlang/bin")
 (require 'erlang-start)
 
 (defun make-run ()
@@ -25,12 +24,15 @@
 	  (make-run)))))
 
 (defun my-erlang-mode-hook ()
-  (local-set-key (kbd "C-x C-r") 'find-makefile-and-run)
-  (projmake-mode)
   (require 'my-whitespace-mode)
-  (setq whitespace-line-column 120) 
-  (projmake-search-load-project)
-  (require 'dumb-indent))
+  (require 'dumb-indent)
+  (local-set-key (kbd "C-x C-r") 'find-makefile-and-run)
+  (setq whitespace-line-column 120)
+  (if (buffer-file-name)
+      (progn
+	(projmake-mode)
+	(projmake-search-load-project))
+    (message "")))
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 
