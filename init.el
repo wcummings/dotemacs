@@ -9,7 +9,10 @@
 		     erlang
 		     skeletor
 		     js2-mode
-		     edts))
+		     edts
+		     tern
+		     company-mode
+		     company-tern))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
