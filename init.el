@@ -11,7 +11,7 @@
 		     js2-mode
 		     edts
 		     tern
-		     company-mode
+		     company
 		     company-tern))
 (package-initialize)
 (unless package-archive-contents
