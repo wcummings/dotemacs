@@ -1,0 +1,17 @@
+(require 'company)
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(add-to-list 'company-backends 'company-tern)
+
+(defun my-js2-mode-hook ()
+  (tern-mode t)
+  (company-mode t))
+
+(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
+
+(provide 'javascript)

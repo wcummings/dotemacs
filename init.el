@@ -6,7 +6,6 @@
 			 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (setq package-list '(magit
-		     projmake-mode
 		     erlang
 		     skeletor
 		     js2-mode
@@ -73,3 +72,4 @@
 (require 'my-erlang-mode)
 (require 'skeletons)
 (require 'linum-mode)
+(require 'javascript)

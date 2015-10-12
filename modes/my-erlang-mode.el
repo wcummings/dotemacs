@@ -8,10 +8,7 @@
   (require 'my-whitespace-mode)
   (require 'dumb-indent)
   (local-set-key (kbd "C-x C-r") 'find-makefile-and-run)
-  (setq whitespace-line-column 120)
-  (when (buffer-file-name)
-    (progn
-      (edts-mode t))))
+  (setq whitespace-line-column 120))
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 
