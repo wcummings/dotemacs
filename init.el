@@ -54,8 +54,12 @@
   (term-line-mode)
   (ansi-term "/bin/bash"))
 
+(defun spawn-eshell ()
+  (interactive)
+  (eshell t))
+
 (global-set-key (kbd "C-x t") 'spawn-shell)
-(global-set-key (kbd "C-x e") 'eshell)
+(global-set-key (kbd "C-x e") 'spawn-eshell)
 
 (setq more-paths '("/sbin" "/usr/sbin"))
 (setq more-paths-string (concat (mapconcat 'identity more-paths ":") ":"))
