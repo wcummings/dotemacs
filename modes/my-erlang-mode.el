@@ -1,6 +1,6 @@
-(add-to-list 'load-path (car (file-expand-wildcards "/usr/lib64/erlang/lib/tools-*/emacs")))
-(setq erlang-root-dir "/usr/lib64/erlang")
-(add-to-list 'exec-path "/usr/lib64/erlang/bin")
+(add-to-list 'load-path (car (file-expand-wildcards "/usr/lib/erlang/lib/tools-*/emacs")))
+(setq erlang-root-dir "/usr/lib/erlang")
+(add-to-list 'exec-path "/usr/lib/erlang/bin")
 (require 'erlang-start)
 (require 'edts-start)
 
