@@ -8,7 +8,9 @@
 (setq package-list '(magit
 		     projmake-mode
 		     erlang
-		     skeletor))
+		     skeletor
+		     js2-mode
+		     edts))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -32,17 +34,14 @@
 (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
 
-;;(setq linum-format "%4d \u2502 ")
-;;(global-linum-mode t)
-(require 'linum-mode)
-
 (global-set-key (kbd "C-x g") 'magit-status)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (setq custom-theme-directory "~/.emacs.d/theme")
 (setq custom-safe-themes t)
-(load-theme 'my-solarized)
+(when (display-graphic-p)
+  (load-theme 'my-solarized))
 
 (set-face-attribute 'default nil :height 100)
 
@@ -56,7 +55,7 @@
 (global-set-key (kbd "C-x t") 'spawn-shell)
 (global-set-key (kbd "C-x e") 'eshell)
 
-(setq more-paths '("/sbin" "/usr/sbin" "~/gocode/bin"))
+(setq more-paths '("/sbin" "/usr/sbin"))
 (setq more-paths-string (concat (mapconcat 'identity more-paths ":") ":"))
 
 (defun setup-path ()
@@ -73,3 +72,4 @@
 
 (require 'my-erlang-mode)
 (require 'skeletons)
+(require 'linum-mode)

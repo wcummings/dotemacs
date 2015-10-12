@@ -1,3 +1,5 @@
+(when (not (display-graphic-p))
+  (setq linum-format "%4d | "))
 (global-linum-mode t)
 
 (defcustom linum-disabled-modes-list '(eshell-mode wl-summary-mode compilation-mode org-mode text-mode dired-mode doc-view-mode image-mode)

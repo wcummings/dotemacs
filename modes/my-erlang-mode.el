@@ -1,36 +1,17 @@
-;;; FIXME: find less shitty way to do this
-(setq repl-buffer "*Erlang release*")
-
-(require 'projmake-mode)
-(require 'dumb-indent)
-(add-to-list 'load-path (car (file-expand-wildcards "/usr/lib/erlang/lib/tools-*/emacs")))
-(setq erlang-root-dir "/usr/lib/erlang")
-(add-to-list 'exec-path "/usr/lib/erlang/bin")
+(add-to-list 'load-path (car (file-expand-wildcards "/usr/lib64/erlang/lib/tools-*/emacs")))
+(setq erlang-root-dir "/usr/lib64/erlang")
+(add-to-list 'exec-path "/usr/lib64/erlang/bin")
 (require 'erlang-start)
-
-(defun make-run ()
-  (if (get-buffer repl-buffer)
-      (kill-buffer repl-buffer)
-    (message ""))
-  (generate-new-buffer repl-buffer)
-  (async-shell-command "make run" repl-buffer))
-
-(defun find-makefile-and-run ()
-  (interactive)
-  (if (file-exists-p "Makefile")
-      (make-run)
-    (if (file-exists-p "../Makefile")
-	(progn
-	  (cd "..")
-	  (make-run)))))
+(require 'edts-start)
 
 (defun my-erlang-mode-hook ()
-  (local-set-key (kbd "C-x C-r") 'find-makefile-and-run)
-  (projmake-mode)
   (require 'my-whitespace-mode)
-  (setq whitespace-line-column 120) 
-  (projmake-search-load-project)
-  (require 'dumb-indent))
+  (require 'dumb-indent)
+  (local-set-key (kbd "C-x C-r") 'find-makefile-and-run)
+  (setq whitespace-line-column 120)
+  (when (buffer-file-name)
+    (progn
+      (edts-mode t))))
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 
