@@ -12,7 +12,8 @@
 		     edts
 		     tern
 		     company
-		     company-tern))
+		     company-tern
+		     php-mode))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -61,7 +62,7 @@
 (global-set-key (kbd "C-x t") 'spawn-shell)
 (global-set-key (kbd "C-x e") 'spawn-eshell)
 
-(setq more-paths '("/sbin" "/usr/sbin"))
+(setq more-paths '("/sbin" "/usr/sbin" "/usr/local/bin"))
 (setq more-paths-string (concat (mapconcat 'identity more-paths ":") ":"))
 
 (defun setup-path ()
