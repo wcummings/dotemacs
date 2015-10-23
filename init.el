@@ -13,7 +13,8 @@
 		     tern
 		     company
 		     company-tern
-		     php-mode))
+		     php-mode
+		     sx))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -76,6 +77,14 @@
   (setup-path))
 
 (add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
+
+(defun search-stackoverflow (query)
+  ;; s prefix reads a string from the minibuffer
+  (interactive "sQuery: ")
+  (message "%s" query)
+  (sx-search 'stackoverflow query))
+
+(global-set-key (kbd "C-x 9") 'search-stackoverflow)
 
 (require 'my-erlang-mode)
 (require 'skeletons)
