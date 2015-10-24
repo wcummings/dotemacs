@@ -81,7 +81,6 @@
 (defun search-stackoverflow (query)
   ;; s prefix reads a string from the minibuffer
   (interactive "sQuery: ")
-  (message "%s" query)
   (sx-search 'stackoverflow query))
 
 (global-set-key (kbd "C-x 9") 'search-stackoverflow)
