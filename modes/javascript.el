@@ -4,6 +4,8 @@
 
 (add-to-list 'company-backends 'company-tern)
 
+(setq js2-basic-offset 2)
+
 (defun my-js2-mode-hook ()
   (tern-mode t)
   (company-mode t))
