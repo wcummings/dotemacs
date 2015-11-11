@@ -42,6 +42,8 @@
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+(tool-bar-mode -1)
+
 (setq custom-theme-directory "~/.emacs.d/theme")
 (setq custom-safe-themes t)
 (when (display-graphic-p)
