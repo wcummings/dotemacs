@@ -94,7 +94,7 @@
   (interactive "sQuery: ")
   (sx-search 'emacs query))
 
-(global-set-key (kbd "C-x 9") 'sx-search-emacs)
+(global-set-key (kbd "C-x 8") 'sx-search-emacs)
 (global-set-key (kbd "C-x 9") 'sx-search-stackoverflow)
 
 (require 'rotate-windows)
