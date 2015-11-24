@@ -84,12 +84,18 @@
 
 (add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
 
-(defun search-stackoverflow (query)
+(defun sx-search-stackoverflow (query)
   ;; s prefix reads a string from the minibuffer
   (interactive "sQuery: ")
   (sx-search 'stackoverflow query))
 
-(global-set-key (kbd "C-x 9") 'search-stackoverflow)
+(defun sx-search-emacs (query)
+  ;; s prefix reads a string from the minibuffer
+  (interactive "sQuery: ")
+  (sx-search 'emacs query))
+
+(global-set-key (kbd "C-x 9") 'sx-search-emacs)
+(global-set-key (kbd "C-x 9") 'sx-search-stackoverflow)
 
 (require 'rotate-windows)
 (global-set-key (kbd "C-x n") 'rotate-windows)
