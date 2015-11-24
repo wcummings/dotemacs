@@ -16,7 +16,8 @@
 		     php-mode
 		     sx
 		     go-mode
-		     lua-mode))
+		     lua-mode
+		     misc-cmds))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -96,6 +97,8 @@
 
 (global-set-key (kbd "C-x 8") 'sx-search-emacs)
 (global-set-key (kbd "C-x 9") 'sx-search-stackoverflow)
+
+(global-set-key (kbd "C-x 4") 'kill-buffer-and-its-windows)
 
 (require 'rotate-windows)
 (global-set-key (kbd "C-x n") 'rotate-windows)
