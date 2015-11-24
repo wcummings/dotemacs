@@ -104,6 +104,8 @@
 (require 'rotate-windows)
 (global-set-key (kbd "C-x n") 'rotate-windows)
 
+(setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
+
 (require 'my-erlang-mode)
 (require 'skeletons)
 (require 'linum-mode)
