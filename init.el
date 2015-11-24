@@ -14,7 +14,9 @@
 		     company
 		     company-tern
 		     php-mode
-		     sx))
+		     sx
+		     go-mode
+		     lua-mode))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -49,7 +51,7 @@
 (when (display-graphic-p)
   (load-theme 'my-solarized))
 
-(set-face-attribute 'default nil :height 100)
+;(set-face-attribute 'default nil :height 100)
 
 (setq inhibit-startup-screen t)
 
@@ -65,10 +67,12 @@
 (global-set-key (kbd "C-x t") 'spawn-shell)
 (global-set-key (kbd "C-x e") 'spawn-eshell)
 
-(setq more-paths '("/sbin" "/usr/sbin" "/usr/local/bin"))
+(setq go-path "/usr/local/opt/go/libexec/bin")
+(setq more-paths `("/sbin" "/usr/sbin" "/usr/local/bin" ,go-path))
 (setq more-paths-string (concat (mapconcat 'identity more-paths ":") ":"))
 
 (defun setup-path ()
+  (setenv "GOPATH" go-path)
   (setq exec-path (append exec-path more-paths))
   (setenv "PATH" (concat more-paths-string (getenv "PATH"))))
 
@@ -87,7 +91,12 @@
 
 (global-set-key (kbd "C-x 9") 'search-stackoverflow)
 
+(require 'rotate-windows)
+(global-set-key (kbd "C-x n") 'rotate-windows)
+
 (require 'my-erlang-mode)
 (require 'skeletons)
 (require 'linum-mode)
 (require 'javascript)
+(require 'go)
+(require 'lua)
