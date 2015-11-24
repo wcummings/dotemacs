@@ -17,7 +17,8 @@
 		     sx
 		     go-mode
 		     lua-mode
-		     misc-cmds))
+		     misc-cmds
+		     chess))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
