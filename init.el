@@ -18,7 +18,8 @@
 		     go-mode
 		     lua-mode
 		     misc-cmds
-		     chess))
+		     chess
+		     gist))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -74,7 +75,7 @@
 (setq more-paths-string (concat (mapconcat 'identity more-paths ":") ":"))
 
 (defun setup-path ()
-  (setenv "GOPATH" go-path)
+;;  (setenv "GOPATH" (expand-file-name "~/go"))
   (setq exec-path (append exec-path more-paths))
   (setenv "PATH" (concat more-paths-string (getenv "PATH"))))
 
