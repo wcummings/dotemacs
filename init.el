@@ -63,6 +63,9 @@
   (term-line-mode)
   (ansi-term "/bin/bash"))
 
+(require 'eshell)
+(setq eshell-scroll-to-bottom-on-input t)
+
 (defun spawn-eshell ()
   (interactive)
   (eshell t))
