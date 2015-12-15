@@ -75,13 +75,13 @@
 (setq more-paths-string (concat (mapconcat 'identity more-paths ":") ":"))
 
 (defun setup-path ()
-;;  (setenv "GOPATH" (expand-file-name "~/go"))
   (setq exec-path (append exec-path more-paths))
   (setenv "PATH" (concat more-paths-string (getenv "PATH"))))
 
 (setup-path)
 
 (defun my-eshell-mode-hook ()
+  (require 'eshell-functions)
   (setq eshell-path-env (concat more-paths-string eshell-path-env))
   (setup-path))
 
