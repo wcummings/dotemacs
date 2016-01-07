@@ -65,7 +65,6 @@
 
 (require 'eshell)
 (setq eshell-scroll-to-bottom-on-input t)
-(add-to-list 'eshell-visual-commands "npm")
 
 (defun spawn-eshell ()
   (interactive)
