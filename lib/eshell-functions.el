@@ -1,7 +1,7 @@
 (defun eshell/up (n)
   (dotimes (i n) (cd "..")))
 
-(defun eshell/h ()
+(defun eshell/~ ()
   (cd "~"))
 
 (provide 'eshell-functions)
