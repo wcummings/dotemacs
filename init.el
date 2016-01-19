@@ -85,6 +85,7 @@
 
 (defun my-eshell-mode-hook ()
   (require 'eshell-functions)
+  (require 'eshell-env)
   (setq eshell-path-env (concat more-paths-string eshell-path-env))
   (setup-path))
 
@@ -110,9 +111,12 @@
 
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
 
+(setq tramp-default-method "ssh")
+
 (require 'my-erlang-mode)
 (require 'skeletons)
 (require 'linum-mode)
 (require 'javascript)
 (require 'go)
 (require 'lua)
+
