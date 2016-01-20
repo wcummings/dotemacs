@@ -19,7 +19,7 @@
 		     lua-mode
 		     misc-cmds
 		     chess
-		     gist))
+		     restclient))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
