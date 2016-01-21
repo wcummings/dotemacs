@@ -40,6 +40,10 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+(let ((host-settings-file (format "host_settings/%s.el" (downcase system-name))))
+  (when (file-exists-p host-settings-file)
+    (load host-settings-file)))
+
 (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
 
@@ -111,7 +115,12 @@
 
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
 
+;; lets us sudo on the remote host
 (setq tramp-default-method "ssh")
+(add-to-list 'tramp-default-proxies-alist
+	      '(nil "\\`root\\'" "/ssh:%h:"))
+(add-to-list 'tramp-default-proxies-alist
+	     '((regexp-quote (system-name)) nil nil))
 
 (require 'my-erlang-mode)
 (require 'skeletons)
@@ -119,4 +128,3 @@
 (require 'javascript)
 (require 'go)
 (require 'lua)
-
