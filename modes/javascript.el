@@ -1,18 +1,19 @@
-(require 'company)
-
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-(add-to-list 'company-backends 'company-tern)
 
 (setq js2-basic-offset 2)
 
 (defun my-js2-mode-hook ()
   (setq indent-tabs-mode nil)
   (setq tab-always-indent nil)
+  (setq tern-ac-on-dot t)
   (tern-mode t)
-  (set-local-key (kbd "M-\t") 'company-complete)
-  (company-mode t))
+  (local-set-key (kbd "M-\t") 'company-complete)
+  (auto-complete-mode))
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
 
 (provide 'javascript)

@@ -11,8 +11,7 @@
 		     js2-mode
 		     edts
 		     tern
-		     company
-		     company-tern
+		     tern-auto-complete
 		     php-mode
 		     sx
 		     go-mode
@@ -116,11 +115,12 @@
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
 
 ;; lets us sudo on the remote host
-(setq tramp-default-method "ssh")
+(require 'tramp)
 (add-to-list 'tramp-default-proxies-alist
-	      '(nil "\\`root\\'" "/ssh:%h:"))
+	     '(nil "\\`root\\'" "/ssh:%h:"))
 (add-to-list 'tramp-default-proxies-alist
 	     '((regexp-quote (system-name)) nil nil))
+(setq tramp-default-method "ssh")
 
 (require 'my-erlang-mode)
 (require 'skeletons)
