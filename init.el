@@ -122,6 +122,11 @@
 	     '((regexp-quote (system-name)) nil nil))
 (setq tramp-default-method "ssh")
 
+(defun indent-buffer ()
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max) nil)))
+
 (require 'my-erlang-mode)
 (require 'skeletons)
 (require 'linum-mode)
