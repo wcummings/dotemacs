@@ -4,10 +4,9 @@
 
 (defun my-js2-mode-hook ()
   (setq indent-tabs-mode nil)
-  (setq tab-always-indent nil)
+  (setq tab-always-indent 'complete)
   (setq tern-ac-on-dot t)
   (tern-mode t)
-  (local-set-key (kbd "M-\t") 'company-complete)
   (auto-complete-mode))
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
