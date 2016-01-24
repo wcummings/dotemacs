@@ -7,7 +7,8 @@
   (setq tab-always-indent 'complete)
   (setq tern-ac-on-dot t)
   (tern-mode t)
-  (auto-complete-mode))
+  (auto-complete-mode)
+  (setq ac-delay 0.0))
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 (eval-after-load 'tern
