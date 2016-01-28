@@ -9,7 +9,8 @@
   (setq tern-ac-on-dot t)
   (tern-mode t)
   (auto-complete-mode)
-  (setq ac-delay 0.0))
+  (setq ac-delay 0.0)
+  (setq ac-quick-help-delay 0.0))
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 (eval-after-load 'tern
