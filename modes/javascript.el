@@ -5,6 +5,7 @@
 (defun my-js2-mode-hook ()
   (setq indent-tabs-mode nil)
   (setq tab-always-indent 'complete)
+  ;;(add-to-list 'completion-styles 'initials t)
   (setq tern-ac-on-dot t)
   (tern-mode t)
   (auto-complete-mode)
