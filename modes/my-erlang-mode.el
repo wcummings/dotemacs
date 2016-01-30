@@ -6,7 +6,7 @@
 
 (defun my-erlang-mode-hook ()
   ;;(require 'my-whitespace-mode)
-  (require 'dumb-indent)
+  ;;(require 'dumb-indent)
   (setq whitespace-line-column 120))
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
