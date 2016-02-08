@@ -18,7 +18,9 @@
 		     lua-mode
 		     misc-cmds
 		     chess
-		     restclient))
+		     restclient
+		     racket-mode
+		     smartparens))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -133,3 +135,4 @@
 (require 'javascript)
 (require 'go)
 (require 'lua)
+(require 'racket)
