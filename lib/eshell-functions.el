@@ -4,4 +4,7 @@
 (defun eshell/~ ()
   (cd "~"))
 
+(defun eshell/l ()
+  (eshell/ls))
+
 (provide 'eshell-functions)
