@@ -20,8 +20,7 @@
 		     chess
 		     restclient
 		     racket-mode
-		     smartparens
-		     flymake-mode))
+		     smartparens))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
