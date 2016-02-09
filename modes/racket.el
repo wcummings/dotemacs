@@ -11,7 +11,7 @@
 
 (flycheck-define-checker racket
   "Racket syntax checker"
-  :command ("raco" "expand" source)
+  :command ("raco" "expand" source-original)
   :error-patterns
   ((error line-start (file-name) ":" line ":" column ":" (message) line-end))
   :modes racket-mode)
