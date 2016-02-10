@@ -12,6 +12,9 @@
 (flycheck-define-checker racket
   "Racket syntax checker"
   :command ("raco" "expand" source-original)
+  :error-filter
+  (lambda (errors)
+    (flycheck-sanitize-errors (flycheck-increment-error-columns errors)))
   :error-patterns
   ((error line-start (file-name) ":" line ":" column ":" (message) line-end))
   :modes racket-mode)
