@@ -11,7 +11,7 @@
 
 (flycheck-define-checker racket
   "Racket syntax checker"
-  :command ("raco" "expand" source-original)
+  :command ("raco" "expand" source-inplace)
   :error-filter
   (lambda (errors)
     (flycheck-sanitize-errors (flycheck-increment-error-columns errors)))
