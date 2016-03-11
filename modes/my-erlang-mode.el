@@ -4,10 +4,14 @@
 (require 'erlang-start)
 (require 'edts-start)
 
+(setq project-command '("make" "run"))
+
 (defun my-erlang-mode-hook ()
   ;;(require 'my-whitespace-mode)
   ;;(require 'dumb-indent)
-  (setq whitespace-line-column 120))
+  ;;(setq whitespace-line-column 120))
+  (setq indent-tabs-mode nil)
+  (setq ac-quick-help-delay 0.1))
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 

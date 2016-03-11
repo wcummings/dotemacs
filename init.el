@@ -20,7 +20,8 @@
 		     chess
 		     restclient
 		     racket-mode
-		     smartparens))
+		     smartparens
+		     auctex))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -78,12 +79,13 @@
 (global-set-key (kbd "C-x t") 'spawn-shell)
 (global-set-key (kbd "C-x e") 'spawn-eshell)
 
-(setq go-path "/usr/local/opt/go/libexec/bin")
-(setq more-paths `("/sbin" "/usr/sbin" "/usr/local/bin" ,go-path))
+(setq go-path (expand-file-name "~/go/"))
+(setq more-paths `("/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/opt/go/libexec/bin" ,(concat go-path "bin") "/usr/texbin"))
 (setq more-paths-string (concat (mapconcat 'identity more-paths ":") ":"))
 
 (defun setup-path ()
   (setq exec-path (append exec-path more-paths))
+  (setenv "GOPATH" go-path)
   (setenv "PATH" (concat more-paths-string (getenv "PATH"))))
 
 (setup-path)
