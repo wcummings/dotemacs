@@ -12,6 +12,7 @@
 			    :password ,(concat "wcummings:" znc-password)
 			    :full-name "wcummings")))
 
+;; http://superuser.com/questions/249563/using-rcirc-with-a-irc-bouncer-like-znc
 (defun rcirc-detach-buffer ()
   (interactive)
   (let ((buffer (current-buffer)))
