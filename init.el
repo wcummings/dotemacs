@@ -20,8 +20,7 @@
 		     chess
 		     restclient
 		     racket-mode
-		     smartparens
-		     auctex))
+		     smartparens))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -143,3 +142,4 @@
 (require 'go)
 (require 'lua)
 (require 'racket)
+(require 'irc)
