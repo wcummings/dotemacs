@@ -1,16 +1,17 @@
 (require 'rcirc)
 
-(setq rcirc-default-nick "wcummings")
-(setq rcirc-default-user-name "wcummings")
-(setq rcirc-default-full-name "wcummings")
+(setq irc-nick "wcummings")
+(setq rcirc-default-nick irc-nick)
+(setq rcirc-default-user-name irc-nick)
+(setq rcirc-default-full-name irc-nick)
 
 (load "znc-secret.el")
 
 (setq rcirc-server-alist `((,znc-host
 			    :port ,znc-port
-			    :nick "wcummings"
-			    :password ,(concat "wcummings:" znc-password)
-			    :full-name "wcummings")))
+			    :nick ,irc-nick
+			    :password ,(concat irc-nick ":" znc-password)
+			    :full-name ,irc-nick)))
 
 ;; http://superuser.com/questions/249563/using-rcirc-with-a-irc-bouncer-like-znc
 (defun rcirc-detach-buffer ()
