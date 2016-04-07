@@ -32,4 +32,21 @@
 ;; bind to C-x k so i dont accidentally part channels
 (define-key rcirc-mode-map (kbd "C-x k") 'rcirc-detach-buffer)
 
+;; rcirc only passes a single param, so we need to get more interactively
+(defun-rcirc-command flood (text)
+  "friday flood day"
+  (interactive)
+  (let ((i 0)
+	(count
+	 (string-to-number (read-string "how rude do u wanna be? "))))
+    (while (< i count)
+      (rcirc-send-message process target text)
+      (setq i (+ 1 i)))))
+
+;; https://www.emacswiki.org/emacs/rcircExampleSettings
+(defun-rcirc-command bold (text)
+  "Post a bold message to the current target."
+  (interactive)
+  (rcirc-send-message process target (concat "\002" text "\002")))
+
 (provide 'irc)
