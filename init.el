@@ -20,7 +20,9 @@
 		     chess
 		     restclient
 		     racket-mode
-		     smartparens))
+		     smartparens
+		     flycheck
+		     haskell-mode))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
