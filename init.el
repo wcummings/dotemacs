@@ -22,7 +22,8 @@
 		     racket-mode
 		     smartparens
 		     flycheck
-		     haskell-mode))
+		     haskell-mode
+		     emacs-eclim))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -145,3 +146,4 @@
 (require 'lua)
 (require 'racket)
 (require 'irc)
+(require 'java)
