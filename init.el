@@ -13,7 +13,6 @@
 		     tern
 		     tern-auto-complete
 		     php-mode
-		     sx
 		     go-mode
 		     lua-mode
 		     misc-cmds
@@ -22,8 +21,7 @@
 		     racket-mode
 		     smartparens
 		     flycheck
-		     haskell-mode
-		     emacs-eclim))
+		     haskell-mode))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -99,19 +97,6 @@
   (setup-path))
 
 (add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
-
-(defun sx-search-stackoverflow (query)
-  ;; s prefix reads a string from the minibuffer
-  (interactive "sQuery: ")
-  (sx-search 'stackoverflow query))
-
-(defun sx-search-emacs (query)
-  ;; s prefix reads a string from the minibuffer
-  (interactive "sQuery: ")
-  (sx-search 'emacs query))
-
-(global-set-key (kbd "C-x 8") 'sx-search-emacs)
-(global-set-key (kbd "C-x 9") 'sx-search-stackoverflow)
 
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 
