@@ -21,8 +21,7 @@
 		     racket-mode
 		     smartparens
 		     flycheck
-		     haskell-mode
-		     rcirc-styles))
+		     haskell-mode))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
