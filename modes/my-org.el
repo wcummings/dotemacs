@@ -1,6 +1,7 @@
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
 (setq org-dir "~/org")
+(setq org-log-done 'time)
 
 (defun my-org-mode-hook ()
   (add-hook 'after-save-hook 'org-mode-save-hook nil 'make-it-local))
