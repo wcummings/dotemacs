@@ -123,6 +123,10 @@
 (setq ido-create-new-buffer 'always)
 (ido-mode 1)
 
+;; jdee is shitty
+;;(setq max-lisp-eval-depth 3000)
+;;(setq max-specpdl-size 20000)
+
 (require 'my-erlang-mode)
 (require 'skeletons)
 (require 'linum-mode)
@@ -132,3 +136,4 @@
 (require 'racket)
 (require 'irc)
 (require 'java)
+(require 'my-org)
