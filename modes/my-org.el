@@ -3,7 +3,7 @@
 (setq org-dir "~/org")
 
 (defun my-org-mode-hook ()
-  (add-hook 'after-save-hook 'org-mode-save-hook))
+  (add-hook 'after-save-hook 'org-mode-save-hook nil 'make-it-local))
 
 (defun org-mode-save-hook ()
   (org-save-all-org-buffers)
