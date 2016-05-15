@@ -137,3 +137,5 @@
 (require 'irc)
 (require 'java)
 (require 'my-org)
+
+(toggle-frame-maximized)
