@@ -103,6 +103,8 @@
 (require 'rotate-windows)
 (global-set-key (kbd "C-x n") 'rotate-windows)
 
+(global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
+
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
 
 ;; lets us sudo on the remote host
@@ -138,4 +140,3 @@
 (require 'java)
 (require 'my-org)
 
-(toggle-frame-maximized)
