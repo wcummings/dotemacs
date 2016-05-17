@@ -140,3 +140,4 @@
 (require 'java)
 (require 'my-org)
 
+(cd "~")
