@@ -9,12 +9,12 @@
 
 (defun org-mode-save-hook ()
   (org-save-all-org-buffers)
-  (git-sync))
+  (git-sync-org))
 
-(defun git-sync ()
+(defun git-sync-org ()
   (cd org-directory)
-  (start-process "git-sync" "*git-sync*" "~/.emacs.d/scripts/git-sync"))
+  (start-process "git-sync-org" "*git-sync-org*" "~/.emacs.d/scripts/git-sync"))
 
-(git-sync)
+(git-sync-org)
 
 (provide 'my-org)
