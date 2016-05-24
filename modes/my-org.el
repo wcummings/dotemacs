@@ -17,4 +17,15 @@
 
 (git-sync-org)
 
+(defcustom my-org-mode-gcal-private-url nil
+  "URL to fetch .ics from gmail"
+  :type '(string)
+  :group 'my-customizations)
+
+(defun sync-gcal ()
+  (start-process "sync-gcal" "*sync-gcal*" "~/.emacs.d/scripts/syncgcal.sh" my-org-mode-gcal-private-url))
+
+(when my-org-mode-gcal-private-url
+  (run-with-timer 0 (* 15 60) 'sync-gcal))
+
 (provide 'my-org)

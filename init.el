@@ -129,6 +129,9 @@
 ;;(setq max-lisp-eval-depth 3000)
 ;;(setq max-specpdl-size 20000)
 
+(defgroup my-customizations nil
+  "Customizations for my .emacs")
+
 (require 'my-erlang-mode)
 (require 'skeletons)
 (require 'linum-mode)
@@ -141,3 +144,4 @@
 (require 'my-org)
 
 (cd "~")
+
