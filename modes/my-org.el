@@ -1,6 +1,7 @@
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
 (setq org-directory "~/org")
+(setq org-agenda-files '("todo.org" "gcal_agenda.org"))
 (setq org-log-done 'time)
 (setq org-completion-use-ido 't)
 
@@ -27,5 +28,7 @@
 
 (when my-org-mode-gcal-private-url
   (run-with-timer 0 (* 15 60) 'sync-gcal))
+
+(global-set-key (kbd "C-c a a") 'org-agenda-list)
 
 (provide 'my-org)
