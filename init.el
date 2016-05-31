@@ -1,36 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/modes")
 (add-to-list 'load-path "~/.emacs.d/lib")
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa" . "http://melpa.milkbox.net/packages/")))
-
-(setq package-list '(magit
-		     erlang
-		     skeletor
-		     js2-mode
-		     edts
-		     tern
-		     tern-auto-complete
-		     php-mode
-		     go-mode
-		     lua-mode
-		     misc-cmds
-		     chess
-		     restclient))
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
-
-(setq scroll-step 1)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ; one line at a time
-(setq mouse-wheel-progressive-speed nil) ; don't accelerate scrolling
-(setq mouse-wheel-follow-mouse 't)
+(require 'my-packages)
 
 (setq backup-directory-alist '(("." . "~/.emacs.d/emacs_backups")))
 (setq version-control t)
@@ -63,12 +34,10 @@
 
 (setup-path)
 
-(require 'rotate-windows)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-x n") 'rotate-windows)
-(global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
-(global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
-(global-set-key (kbd "C-x g") 'magit-status)
+(setq scroll-step 1)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ; one line at a time
+(setq mouse-wheel-progressive-speed nil) ; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't)
 
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
 
@@ -91,5 +60,12 @@
 (require 'my-java-mode)
 (require 'my-org-mode)
 (require 'skeletons)
+
+(require 'rotate-windows)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x n") 'rotate-windows)
+(global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
+(global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 (setq default-directory "~")
