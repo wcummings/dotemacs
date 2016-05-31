@@ -18,6 +18,7 @@
 		     misc-cmds
 		     chess
 		     restclient))
+
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -45,10 +46,7 @@
 (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
 
-(global-set-key (kbd "C-x g") 'magit-status)
-
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
+;;; appearance
 (tool-bar-mode -1)
 
 (setq custom-theme-directory "~/.emacs.d/theme")
@@ -56,84 +54,42 @@
 (when (display-graphic-p)
   (load-theme 'my-solarized))
 
-;(set-face-attribute 'default nil :height 100)
-
 (setq inhibit-startup-screen t)
 
-(defun spawn-shell ()
-  (interactive)
-  (term-line-mode)
-  (ansi-term "/bin/bash"))
-
-(require 'eshell)
-(setq eshell-scroll-to-bottom-on-input t)
-
-(defun spawn-eshell ()
-  (interactive)
-  (eshell t))
-
-(global-set-key (kbd "C-x t") 'spawn-shell)
-(global-set-key (kbd "C-x e") 'spawn-eshell)
-
-(setq go-path (expand-file-name "~/go/"))
-(setq more-paths `("/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/opt/go/libexec/bin" ,(concat go-path "bin") "/usr/texbin"))
-(setq more-paths-string (concat (mapconcat 'identity more-paths ":") ":"))
-
 (defun setup-path ()
-  (setq exec-path (append exec-path more-paths))
-  (setenv "GOPATH" go-path)
-  (setenv "PATH" (concat more-paths-string (getenv "PATH"))))
+  (setq exec-path (append exec-path '("/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/opt/go/libexec/bin" "/usr/texbin")))
+  (setq exec-path-env-var-value (concat (mapconcat 'identity exec-path ":") ":"))
+  (setenv "PATH" (concat exec-path-env-var-value (getenv "PATH"))))
 
 (setup-path)
 
-(defun my-eshell-mode-hook ()
-  (require 'eshell-functions)
-  (require 'eshell-env)
-  (setq eshell-path-env (concat more-paths-string eshell-path-env))
-  (setup-path))
-
-(add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
-
-(global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
-
 (require 'rotate-windows)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)
-
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
+(global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
-
-;; lets us sudo on the remote host
-(require 'tramp)
-(add-to-list 'tramp-default-proxies-alist
-	     '(nil "\\`root\\'" "/ssh:%h:"))
-(add-to-list 'tramp-default-proxies-alist
-	     '((regexp-quote (system-name)) nil nil))
-(setq tramp-default-method "ssh")
 
 (defun indent-buffer ()
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max) nil)))
 
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(setq ido-create-new-buffer 'always)
-(ido-mode 1)
-
-;; jdee is shitty
-;;(setq max-lisp-eval-depth 3000)
-;;(setq max-specpdl-size 20000)
-
 (defgroup my-customizations nil
   "Customizations for my .emacs")
 
+(require 'my-ido-mode)
+(require 'my-eshell-mode)
+(require 'my-tramp-mode)
 (require 'my-erlang-mode)
 (require 'my-linum-mode)
 (require 'my-javascript-mode)
-(require 'my-go-mode)
 (require 'my-lua-mode)
 (require 'my-irc-mode)
 (require 'my-java-mode)
 (require 'my-org-mode)
 (require 'skeletons)
+
+(setq default-directory "~")
