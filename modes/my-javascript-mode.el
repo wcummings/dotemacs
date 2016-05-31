@@ -16,4 +16,4 @@
      (require 'tern-auto-complete)
      (tern-ac-setup)))
 
-(provide 'javascript)
+(provide 'my-javascript-mode)

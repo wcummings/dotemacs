@@ -7,4 +7,4 @@
 
 (add-hook 'lua-mode-hook 'my-lua-mode-hook)
 
-(provide 'lua)
+(provide 'my-lua-mode)

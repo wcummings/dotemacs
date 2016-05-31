@@ -17,4 +17,4 @@
               (> (buffer-size) 3000000))
     (linum-mode 1)))
 
-(provide 'linum-mode)
+(provide 'my-linum-mode)

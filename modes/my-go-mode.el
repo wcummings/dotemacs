@@ -4,4 +4,4 @@
 
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
-(provide 'go)
+(provide 'my-go-mode)

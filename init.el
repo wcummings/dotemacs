@@ -17,11 +17,7 @@
 		     lua-mode
 		     misc-cmds
 		     chess
-		     restclient
-		     racket-mode
-		     smartparens
-		     flycheck
-		     haskell-mode))
+		     restclient))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -133,15 +129,11 @@
   "Customizations for my .emacs")
 
 (require 'my-erlang-mode)
+(require 'my-linum-mode)
+(require 'my-javascript-mode)
+(require 'my-go-mode)
+(require 'my-lua-mode)
+(require 'my-irc-mode)
+(require 'my-java-mode)
+(require 'my-org-mode)
 (require 'skeletons)
-(require 'linum-mode)
-(require 'javascript)
-(require 'go)
-(require 'lua)
-(require 'racket)
-(require 'irc)
-(require 'java)
-(require 'my-org)
-
-(cd "~")
-

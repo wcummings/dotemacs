@@ -7,3 +7,5 @@
 (defun jump-to-intellij ()
   (interactive)
   (shell-command "open -a 'IntelliJ IDEA CE'"))
+
+(provide 'my-java-mode)

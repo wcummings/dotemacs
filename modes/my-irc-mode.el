@@ -49,4 +49,4 @@
   (interactive)
   (rcirc-send-message process target (concat "\002" text "\002")))
 
-(provide 'irc)
+(provide 'my-irc-mode)

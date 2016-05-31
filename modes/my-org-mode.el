@@ -31,4 +31,4 @@
 
 (global-set-key (kbd "C-c a a") 'org-agenda-list)
 
-(provide 'my-org)
+(provide 'my-org-mode)
