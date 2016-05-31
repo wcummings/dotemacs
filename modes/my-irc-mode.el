@@ -1,5 +1,20 @@
 (require 'rcirc)
 
+(defcustom my-irc-mode-znc-host nil
+  "ZNC host"
+  :type '(string)
+  :group 'my-customizations)
+
+(defcustom my-irc-mode-znc-port nil
+  "ZNC port"
+  :type '(string)
+  :group 'my-customizations)
+
+(defcustom my-irc-mode-znc-password nil
+  "ZNC password"
+  :type '(string)
+  :group 'my-customizations)
+
 (setq irc-nick "wcummings")
 (setq rcirc-default-nick irc-nick)
 (setq rcirc-default-user-name irc-nick)
@@ -7,10 +22,10 @@
 
 (load "znc-secret.el")
 
-(setq rcirc-server-alist `((,znc-host
-			    :port ,znc-port
+(setq rcirc-server-alist `((,my-irc-mode-znc-host
+			    :port ,my-irc-mode-znc-port
 			    :nick ,irc-nick
-			    :password ,(concat irc-nick ":" znc-password)
+			    :password ,(concat irc-nick ":" my-irc-mode-znc-password)
 			    :full-name ,irc-nick)))
 
 ;; http://superuser.com/questions/249563/using-rcirc-with-a-irc-bouncer-like-znc
