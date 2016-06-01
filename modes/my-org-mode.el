@@ -1,9 +1,14 @@
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
 (setq org-directory "~/org/")
-(setq org-agenda-files '("todo.org" "gcal_agenda.org"))
+(setq rel-org-agenda-files '("todo.org" "gcal_agenda.org"))
 (setq org-log-done 'time)
 (setq org-completion-use-ido 't)
+(setq org-agenda-files (mapcar (function
+				(lambda (f)
+				  (concat (file-name-as-directory org-directory)
+					  f)))
+			       rel-org-agenda-files))
 
 (defun my-org-mode-hook ()
   (add-hook 'after-save-hook 'my-org-mode-save-hook nil 'make-it-local))
