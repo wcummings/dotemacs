@@ -1,14 +1,14 @@
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
-(setq org-directory "~/org")
+(setq org-directory "~/org/")
 (setq org-agenda-files '("todo.org" "gcal_agenda.org"))
 (setq org-log-done 'time)
 (setq org-completion-use-ido 't)
 
 (defun my-org-mode-hook ()
-  (add-hook 'after-save-hook 'org-mode-save-hook nil 'make-it-local))
+  (add-hook 'after-save-hook 'my-org-mode-save-hook nil 'make-it-local))
 
-(defun org-mode-save-hook ()
+(defun my-org-mode-save-hook ()
   (org-save-all-org-buffers)
   (git-sync-org))
 

@@ -28,7 +28,7 @@
 (setq inhibit-startup-screen t)
 
 (defun setup-path ()
-  (setq exec-path (append exec-path '("/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/opt/go/libexec/bin" "/usr/texbin")))
+  (setq exec-path (append '("/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/opt/go/libexec/bin" "/usr/texbin") exec-path))
   (setq exec-path-env-var-value (concat (mapconcat 'identity exec-path ":") ":"))
   (setenv "PATH" (concat exec-path-env-var-value (getenv "PATH"))))
 
@@ -67,5 +67,3 @@
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
-
-(setq default-directory "~")

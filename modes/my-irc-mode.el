@@ -20,8 +20,6 @@
 (setq rcirc-default-user-name irc-nick)
 (setq rcirc-default-full-name irc-nick)
 
-(load "znc-secret.el")
-
 (setq rcirc-server-alist `((,my-irc-mode-znc-host
 			    :port ,my-irc-mode-znc-port
 			    :nick ,irc-nick
