@@ -7,4 +7,11 @@
 (defun eshell/l ()
   (eshell/ls))
 
+(defun eshell/ts-to-date (ts)
+  (format-time-string "%Y-%m-%d %T UTC" (seconds-to-time ts)))
+
+(defun eshell/ts ()
+  (let ((time (date-to-time (current-time-string))))
+    (float-time time)))
+
 (provide 'eshell-functions)
