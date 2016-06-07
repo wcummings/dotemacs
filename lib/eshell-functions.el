@@ -14,4 +14,9 @@
   (let ((time (date-to-time (current-time-string))))
     (float-time time)))
 
+(defun eshell/clear ()
+  "Clears the buffer."
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
+
 (provide 'eshell-functions)
