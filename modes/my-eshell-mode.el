@@ -5,6 +5,8 @@
 ;; (setq eshell-smart-space-goes-to-end t)
 ;; (setq eshell-scroll-to-bottom-on-input t)
 
+(setq eshell-aliases-file "~/.emacs.d/eshell.aliases")
+
 (defun spawn-eshell ()
   (interactive)
   (eshell t))
