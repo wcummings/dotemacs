@@ -1,2 +1,0 @@
-alias gd git --no-pager diff
-alias gg git --no-pager grep $1
