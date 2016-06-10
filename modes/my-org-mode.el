@@ -29,6 +29,7 @@
   :group 'my-customizations)
 
 (defun sync-gcal ()
+  (interactive)
   (start-process "sync-gcal" "*sync-gcal*" "~/.emacs.d/scripts/syncgcal.sh" my-org-mode-gcal-private-url))
 
 (when my-org-mode-gcal-private-url
