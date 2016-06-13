@@ -1,6 +1,6 @@
 (add-to-list 'load-path "~/.emacs.d/modes")
 (add-to-list 'load-path "~/.emacs.d/lib")
-
+(require 'my-env)
 (require 'my-packages)
 
 (setq backup-directory-alist '(("." . "~/.emacs.d/emacs_backups")))
@@ -26,14 +26,6 @@
   (load-theme 'my-solarized))
 
 (setq inhibit-startup-screen t)
-
-(defun setup-path ()
-  (setq exec-path (append '("/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/opt/go/libexec/bin" "/usr/texbin") exec-path))
-  (setq exec-path-env-var-value (concat (mapconcat 'identity exec-path ":") ":"))
-  (setenv "PATH" (concat exec-path-env-var-value (getenv "PATH"))))
-
-(setup-path)
-
 (setq scroll-step 1)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ; one line at a time
 (setq mouse-wheel-progressive-speed nil) ; don't accelerate scrolling
