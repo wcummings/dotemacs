@@ -32,6 +32,18 @@
   (interactive)
   (ansi-term "/bin/bash"))
 
+(defun my-eshell-prompt-function ()
+  (concat (abbreviate-file-name (eshell/pwd)) " "
+	  (if (> eshell-last-command-status 0)
+	      (propertize ":(" 'face '(:foreground "red"))
+	    (propertize ":)" 'face '(:foreground "green")))
+	  " $ "))
+
+(setq eshell-prompt-function 'my-eshell-prompt-function)
+;; (setq eshell-prompt-regex "^[^#$]*[#$] ")
+
+(add-to-list 'eshell-visual-commands "ssh")
+
 (global-set-key (kbd "C-x t") 'spawn-shell)
 (global-set-key (kbd "C-x e") 'spawn-eshell)
 

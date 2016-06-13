@@ -1,10 +1,10 @@
 (defun add-to-path (path)
-  (nconc (list path) exec-path)
+  (nconc (list (expand-file-name path)) exec-path)
   (add-to-env-var "PATH" path))
 
 (defun add-to-env-var (varname value)
   (let ((existing (getenv varname)))
-    (setenv varname (concat value ":" existing))))
+    (setenv varname (concat (expand-file-name value) ":" existing))))
 
 (setenv "NODE_NO_READLINE" "1")
 
@@ -14,6 +14,7 @@
 (add-to-path "/usr/sbin")
 (add-to-path "/sbin")
 (add-to-path "~/ajoke/bin")
+(add-to-path "/usr/local/opt/coreutils/libexec/gnubin")
 
 (add-to-env-var "PERL5LIB" (expand-file-name "~/ajoke/etc/perl"))
 
