@@ -36,7 +36,7 @@
   (concat (abbreviate-file-name (eshell/pwd)) " "
 	  (if (> eshell-last-command-status 0)
 	      (propertize ":(" 'face '(:foreground "red"))
-	    (propertize ":)" 'face '(:foreground "green")))
+	    (propertize ":)" 'face '(:foreground "light green")))
 	  " $ "))
 
 (setq eshell-prompt-function 'my-eshell-prompt-function)
