@@ -51,6 +51,7 @@
 (require 'my-irc-mode)
 (require 'my-java-mode)
 (require 'my-org-mode)
+(require 'my-elisp-mode)
 (require 'skeletons)
 
 (require 'rotate-windows)

@@ -2,6 +2,7 @@
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
+;;(defmacro require-
 (setq package-list '(magit
 		     erlang
 		     skeletor
@@ -14,7 +15,8 @@
 		     lua-mode
 		     misc-cmds
 		     chess
-		     restclient))
+		     restclient
+		     rainbow-delimiters))
 
 (package-initialize)
 (unless package-archive-contents
