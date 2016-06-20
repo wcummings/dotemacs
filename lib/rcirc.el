@@ -539,15 +539,15 @@ If ARG is non-nil, instead prompt for connection parameters."
 
 (setq rcirc-last-v3-server-message-time-file "~/.emacs.d/.rcirc-last-v3-server-message-time")
 (setq rcirc-last-v3-server-message-time-initial nil)
-(when (file-exists-p rcirc-last-v3-server-message-time-file)
-  (setq rcirc-last-v3-server-message-time-initial
-	(with-temp-buffer (insert-file-contents "~/.emacs.d/.rcirc-last-v3-server-message-time")
-			  (read (current-buffer)))))
 
 ;;;###autoload
 (defun rcirc-connect (server &optional port nick user-name
                              full-name startup-channels password encryption
                              server-alias)
+  (when (file-exists-p rcirc-last-v3-server-message-time-file)
+  (setq rcirc-last-v3-server-message-time-initial
+	(with-temp-buffer (insert-file-contents "~/.emacs.d/.rcirc-last-v3-server-message-time")
+			  (read (current-buffer)))))
   (save-excursion
     (message "Connecting to %s..." (or server-alias server))
     (let* ((inhibit-eol-conversion)
