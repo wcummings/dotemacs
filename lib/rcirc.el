@@ -2677,7 +2677,6 @@ the only argument."
                 (string-match "\\`You are now logged in as .+\\.\\'" message)))
           (setq rcirc-user-authenticated t)
           (run-hook-with-args 'rcirc-authenticated-hook process)
-	  ;!!
           (remove-hook 'rcirc-authenticated-hook 'rcirc-join-channels-post-auth t))))))
 
 (defun rcirc-handler-WALLOPS (process sender args _text)
