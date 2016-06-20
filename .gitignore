@@ -2,3 +2,4 @@ node_modules
 ./.tern-project
 npm-debug.log*
 custom.el
+.rcirc-last-v3-server-message-time
