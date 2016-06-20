@@ -1,4 +1,4 @@
-(require 'rcirc)
+(load "~/.emacs.d/lib/rcirc.el")
 
 (defcustom my-irc-mode-znc-host nil
   "ZNC host"
@@ -24,7 +24,8 @@
 			    :port ,my-irc-mode-znc-port
 			    :nick ,irc-nick
 			    :password ,(concat irc-nick ":" my-irc-mode-znc-password)
-			    :full-name ,irc-nick)))
+			    :full-name ,irc-nick
+			    :encryption tls)))
 
 ;; http://superuser.com/questions/249563/using-rcirc-with-a-irc-bouncer-like-znc
 (defun rcirc-detach-buffer ()

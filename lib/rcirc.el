@@ -527,6 +527,7 @@ If ARG is non-nil, instead prompt for connection parameters."
 (defvar rcirc-topic nil)
 (defvar rcirc-keepalive-timer nil)
 (defvar rcirc-last-server-message-time nil)
+(defvar rcirc-last-v3-server-message-time nil) ; ircv3 time property
 (defvar rcirc-server nil)		; server provided by server
 (defvar rcirc-server-name nil)		; server name given by 001 response
 (defvar rcirc-timeout-timer nil)
@@ -535,6 +536,13 @@ If ARG is non-nil, instead prompt for connection parameters."
 (defvar rcirc-connecting nil)
 (defvar rcirc-connection-info nil)
 (defvar rcirc-process nil)
+
+(setq rcirc-last-v3-server-message-time-file "~/.emacs.d/.rcirc-last-v3-server-message-time")
+(setq rcirc-last-v3-server-message-time-initial nil)
+(when (file-exists-p rcirc-last-v3-server-message-time-file)
+  (setq rcirc-last-v3-server-message-time-initial
+	(with-temp-buffer (insert-file-contents "~/.emacs.d/.rcirc-last-v3-server-message-time")
+			  (read (current-buffer)))))
 
 ;;;###autoload
 (defun rcirc-connect (server &optional port nick user-name
@@ -590,7 +598,7 @@ If ARG is non-nil, instead prompt for connection parameters."
       (rcirc-send-string process (concat "NICK " nick))
       (rcirc-send-string process (concat "USER " user-name
                                          " 0 * :" full-name))
-
+      
       ;; setup ping timer if necessary
       (unless rcirc-keepalive-timer
 	(setq rcirc-keepalive-timer
@@ -598,6 +606,8 @@ If ARG is non-nil, instead prompt for connection parameters."
 
       (message "Connecting to %s...done" (or server-alias server))
 
+
+      (rcirc-send-string process "CAP REQ znc.in/playback")
       ;; return process object
       process)))
 
@@ -764,8 +774,7 @@ Function is called with PROCESS, COMMAND, SENDER, ARGS and LINE.")
 
 (defun rcirc-process-server-response-1 (process text)
   (if (string-match "^\\(@\\([^ ]+\\) \\)?\\(:\\([^ ]+\\) \\)?\\([^ ]+\\) \\(.+\\)$" text)
-      (let* ((tags-string (match-string 2 text))
-	     (tags (rcirc-parse-tags tags-string))
+      (let* ((tags (match-string 2 text))
 	     (user (match-string 4 text))
 	     (sender (rcirc-user-nick user))
              (cmd (match-string 5 text))
@@ -776,17 +785,26 @@ Function is called with PROCESS, COMMAND, SENDER, ARGS and LINE.")
                (args2 (match-string 2 args))
                (args (delq nil (append (split-string args1 " " t)
 				       (list args2)))))
-        (if (not (fboundp handler))
-            (rcirc-handler-generic process cmd sender args text)
-          (funcall handler process sender args text))
-        (run-hook-with-args 'rcirc-receive-message-functions
-                            process cmd sender args text tags)))
+	  (if (not (fboundp handler))
+	      (rcirc-handler-generic process cmd sender args text)
+	    (funcall handler process sender args text))
+	  (run-hook-with-args 'rcirc-receive-message-functions
+			      process cmd sender args text))
+	(when tags
+	  (let* ((parsed-tags (rcirc-parse-tags tags))
+		(time (cdr (assoc "time" parsed-tags)))
+		(timestamp (floor (float-time (date-to-time time)))))
+	    (setq rcirc-last-v3-server-message-time timestamp)
+	    (with-temp-file rcirc-last-v3-server-message-time-file
+	      (insert (with-output-to-string (princ rcirc-last-v3-server-message-time)))))))
     (message "UNHANDLED: %s" text)))
 
-(defun rcirc-parse-tags (tags-string)
+(defun rcirc-parse-tags (tags)
   (mapcar
-   (function (lambda (tag-string) (split-string tag-string "=")))
-   (split-string tags-string ";")))
+   (function (lambda (tag-string)
+	       (let ((p (split-string tags "=")))
+		 `(,(car p) . ,(car (cdr p))))))
+   (split-string tags ";")))
 
 (defvar rcirc-responses-no-activity '("305" "306")
   "Responses that don't trigger activity in the mode-line indicator.")
@@ -2592,6 +2610,15 @@ If ARG is given, opens the URL in a new browser window."
   (with-rcirc-process-buffer process
     (rcirc-join-channels process rcirc-startup-channels)))
 
+(defun rcirc-handler-CAP (process sender args text)
+  (rcirc-check-auth-status process sender args text)
+  (let ((response (second args))
+	(capab (third args)))
+    (when (and rcirc-last-v3-server-message-time-initial
+	       (string= response "ACK")
+	       (string= capab "znc.in/playback"))
+      (rcirc-send-privmsg process "*playback" (format "Play * %d" rcirc-last-v3-server-message-time-initial)))))
+
 (defun rcirc-handler-PRIVMSG (process sender args text)
   (rcirc-check-auth-status process sender args text)
   (let ((target (if (rcirc-channel-p (car args))
@@ -2650,6 +2677,7 @@ the only argument."
                 (string-match "\\`You are now logged in as .+\\.\\'" message)))
           (setq rcirc-user-authenticated t)
           (run-hook-with-args 'rcirc-authenticated-hook process)
+	  ;!!
           (remove-hook 'rcirc-authenticated-hook 'rcirc-join-channels-post-auth t))))))
 
 (defun rcirc-handler-WALLOPS (process sender args _text)
