@@ -592,6 +592,8 @@ If ARG is non-nil, instead prompt for connection parameters."
 
       (add-hook 'auto-save-hook 'rcirc-log-write)
 
+      (rcirc-send-string process "CAP REQ znc.in/playback")
+      
       ;; identify
       (unless (zerop (length password))
         (rcirc-send-string process (concat "PASS " password)))
@@ -606,8 +608,6 @@ If ARG is non-nil, instead prompt for connection parameters."
 
       (message "Connecting to %s...done" (or server-alias server))
 
-
-      (rcirc-send-string process "CAP REQ znc.in/playback")
       ;; return process object
       process)))
 
