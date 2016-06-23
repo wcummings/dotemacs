@@ -40,9 +40,7 @@
 	  " $ "))
 
 (setq eshell-prompt-function 'my-eshell-prompt-function)
-;; (setq eshell-prompt-regex "^[^#$]*[#$] ")
-
-(add-to-list 'eshell-visual-commands "ssh")
+(setq eshell-prompt-regex "^[^#$]*[#$] ")
 
 (global-set-key (kbd "C-x t") 'spawn-shell)
 (global-set-key (kbd "C-x e") 'spawn-eshell)
@@ -52,5 +50,17 @@
   (eshell-smart-initialize))
 
 (add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
+
+;; share history, znc style
+;; http://emacs.stackexchange.com/questions/18564/merge-history-from-multiple-eshells
+(setq eshell-save-history-on-exit nil)
+(defun eshell-append-history ()
+  "Call `eshell-write-history' with the `append' parameter set to `t'."
+  (when eshell-history-ring
+    (let ((newest-cmd-ring (make-ring 1)))
+      (ring-insert newest-cmd-ring (car (ring-elements eshell-history-ring)))
+      (let ((eshell-history-ring newest-cmd-ring))
+        (eshell-write-history eshell-history-file-name t)))))
+(add-hook eshell-pre-command-hook #'eshell-append-history)
 
 (provide 'my-eshell-mode)
