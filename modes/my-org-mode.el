@@ -1,7 +1,7 @@
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
 (setq org-directory "~/org/")
-(setq rel-org-agenda-files '("todo.org" "gcal_agenda.org"))
+(setq rel-org-agenda-files '("todo.org" "gcal-agenda.org" "work.org"))
 (setq org-log-done 'time)
 (setq org-completion-use-ido 't)
 (setq org-agenda-files (mapcar (function
@@ -18,6 +18,7 @@
   (git-sync-org))
 
 (defun git-sync-org ()
+  (interactive)
   (cd org-directory)
   (start-process "git-sync-org" "*git-sync-org*" "~/.emacs.d/scripts/git-sync"))
 
@@ -30,7 +31,7 @@
 
 (defun sync-gcal ()
   (interactive)
-  (start-process "sync-gcal" "*sync-gcal*" "~/.emacs.d/scripts/syncgcal.sh" my-org-mode-gcal-private-url))
+  (start-process "sync-gcal" "*sync-gcal*" "~/.emacs.d/scripts/sync-gcal.sh" my-org-mode-gcal-private-url))
 
 (when my-org-mode-gcal-private-url
   (run-with-timer 0 (* 15 60) 'sync-gcal))
