@@ -23,6 +23,13 @@
   (let ((time (date-to-time (current-time-string))))
     (float-time time)))
 
+(defun eshell/clear ()
+  "Clear the eshell buffer"
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
+
 (defun spawn-eshell ()
   (interactive)
   (eshell t))
@@ -48,6 +55,7 @@
 (defun my-eshell-mode-hook ()
   (setq eshell-path-env (concat (getenv "PATH") eshell-path-env))
   (local-set-key (kbd "C-c e") 'end-of-buffer)
+  (local-set-key (kbd "C-l") 'eshell/clear)
   (eshell-smart-initialize))
 
 (add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
