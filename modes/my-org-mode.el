@@ -38,4 +38,6 @@
 
 (global-set-key (kbd "C-c a a") 'org-agenda-list)
 
+(setq org-src-fontify-natively t)
+
 (provide 'my-org-mode)
