@@ -49,6 +49,13 @@
 (setq eshell-prompt-function 'my-eshell-prompt-function)
 (setq eshell-prompt-regex "^[^#$]*[#$] ")
 
+(defun my-eshell-rename-buffer-after-command ()
+  (let ((last-path-segment
+         (last (remove "" (split-string default-directory "/")))))
+    (rename-buffer (format "*eshell[%s]*" last-path-segment) t)))
+
+(add-hook 'eshell-post-command-hook 'my-eshell-rename-buffer-after-command)
+
 (global-set-key (kbd "C-x t") 'spawn-shell)
 (global-set-key (kbd "C-x e") 'spawn-eshell)
 
