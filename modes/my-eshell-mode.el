@@ -30,6 +30,11 @@
     (erase-buffer)
     (eshell-send-input)))
 
+(defun eshell/grt ()
+  (interactive)
+  (let ((root (locate-dominating-file default-directory ".git")))
+    (eshell/cd root)))
+
 (defun spawn-eshell ()
   (interactive)
   (eshell t))
