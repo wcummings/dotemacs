@@ -44,7 +44,8 @@
 (require 'my-ido-mode)
 (require 'my-eshell-mode)
 (require 'my-tramp-mode)
-(require 'my-erlang-mode)
+(with-eval-after-load 'erlang
+  (require 'my-erlang-mode))
 (require 'my-linum-mode)
 (require 'my-javascript-mode)
 (require 'my-lua-mode)
@@ -60,3 +61,7 @@
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;; (add-hook 'sql-mode-hook
+;;           (lambda ()
+;;             (sql-highlight-mysql-keywords)))
