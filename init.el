@@ -33,6 +33,7 @@
 
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
 
+;; https://github.com/dunn/company-emoji/blob/master/README.md
 (defun set-emoji-font (frame)
   (if (eq system-type 'darwin)
       (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
