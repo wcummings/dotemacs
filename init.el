@@ -33,6 +33,14 @@
 
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
 
+(defun set-emoji-font (frame)
+  (if (eq system-type 'darwin)
+      (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+    (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
+
+(set-emoji-font nil)
+(add-hook 'after-make-frame-functions 'set-emoji-font)
+
 (defun indent-buffer ()
   (interactive)
   (save-excursion
@@ -62,6 +70,3 @@
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;; (add-hook 'sql-mode-hook
-;;           (lambda ()
-;;             (sql-highlight-mysql-keywords)))
