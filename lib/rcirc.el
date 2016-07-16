@@ -564,8 +564,8 @@ If ARG is non-nil, instead prompt for connection parameters."
                      (or server-alias server) nil server port-number
                      :type (or encryption 'plain))))
       ;; Nicer error message
-      (when (not process)
-        (message "Could not connect to server")
+      ;;(when (not process)
+      ;;  (message "Could not connect to server")
       ;; set up process
       (set-process-coding-system process 'raw-text 'raw-text)
       (switch-to-buffer (rcirc-generate-new-buffer-name process nil))
