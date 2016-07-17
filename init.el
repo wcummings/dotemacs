@@ -53,11 +53,14 @@
 (require 'my-ido-mode)
 (require 'my-eshell-mode)
 (require 'my-tramp-mode)
-(with-eval-after-load 'erlang
+(with-eval-after-load "erlang"
   (require 'my-erlang-mode))
 (require 'my-linum-mode)
-(require 'my-javascript-mode)
-(require 'my-lua-mode)
+(with-eval-after-load "js2-mode"
+  (require 'my-javascript-mode))
+(with-eval-after-load "lua-mode"
+  (require 'my-lua-mode))
+
 (require 'my-irc-mode)
 (require 'my-java-mode)
 (require 'my-org-mode)
