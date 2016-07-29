@@ -15,7 +15,6 @@
 		     lua-mode
 		     misc-cmds
 		     chess
-		     restclient
 		     rainbow-delimiters))
 
 (package-initialize)
