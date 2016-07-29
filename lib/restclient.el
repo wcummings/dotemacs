@@ -218,8 +218,8 @@
                      url
                      (format "@%s" body-file)))
          (full-buffer-name (format "*%s*" buffer)))
-    (when header-string
-      (setq args (cons header-string args)))
+    (when (not (string= header-string ""))
+      (add-to-list 'args header-string t))
 
     (with-temp-file body-file
       (insert url-request-data))
@@ -236,9 +236,12 @@
       (switch-to-buffer process-buffer))))
 
 (defun httpie-make-header-string (headers)
-  (mapcar (lambda (header)
-            (concat (car header) ":" (cdr header) ";"))
-          headers))
+  (mapconcat 'identity
+             (mapcar (lambda (header)
+                       (concat (car header) ":" (cdr header)))
+                     headers)
+             ";"))
+  
 
 (defun restclient-prettify-response (method url)
   (save-excursion
