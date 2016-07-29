@@ -546,7 +546,7 @@ If ARG is non-nil, instead prompt for connection parameters."
                              server-alias)
   (when (file-exists-p rcirc-last-v3-server-message-time-file)
   (setq rcirc-last-v3-server-message-time-initial
-	(with-temp-buffer (insert-file-contents "~/.emacs.d/.rcirc-last-v3-server-message-time")
+	(with-temp-buffer (insert-file-contents rcirc-last-v3-server-message-time-file)
 			  (read (current-buffer)))))
   (save-excursion
     (message "Connecting to %s..." (or server-alias server))
@@ -563,9 +563,6 @@ If ARG is non-nil, instead prompt for connection parameters."
            (process (open-network-stream
                      (or server-alias server) nil server port-number
                      :type (or encryption 'plain))))
-      ;; Nicer error message
-      ;;(when (not process)
-      ;;  (message "Could not connect to server")
       ;; set up process
       (set-process-coding-system process 'raw-text 'raw-text)
       (switch-to-buffer (rcirc-generate-new-buffer-name process nil))
