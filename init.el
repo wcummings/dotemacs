@@ -74,3 +74,4 @@
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
 
+(load "restclient.el")
