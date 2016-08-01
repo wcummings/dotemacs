@@ -2,6 +2,7 @@
 (add-to-list 'load-path "~/.emacs.d/lib")
 (require 'my-env)
 (require 'my-packages)
+(eval-when-compile (require 'cl))
 
 (setq backup-directory-alist '(("." . "~/.emacs.d/emacs_backups")))
 (setq version-control t)
@@ -47,6 +48,16 @@
   (save-excursion
     (indent-region (point-min) (point-max) nil)))
 
+;; https://www.emacswiki.org/emacs/WindMove
+(defun ignore-error-wrapper (fn)
+  "Funtion return new function that ignore errors.
+   The function wraps a function with `ignore-errors' macro."
+  (lexical-let ((fn fn))
+    (lambda ()
+      (interactive)
+      (ignore-errors
+        (funcall fn)))))
+
 (defgroup my-customizations nil
   "Customizations for my .emacs")
 
@@ -73,5 +84,9 @@
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-c n") (ignore-error-wrapper 'windmove-down))
+(global-set-key (kbd "C-c p") (ignore-error-wrapper 'windmove-up))
+(global-set-key (kbd "C-c f") (ignore-error-wrapper 'windmove-right))
+(global-set-key (kbd "C-c b") (ignore-error-wrapper 'windmove-left))
 
 (load "restclient.el")
