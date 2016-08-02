@@ -71,7 +71,6 @@
   (require 'my-javascript-mode))
 (with-eval-after-load "lua-mode"
   (require 'my-lua-mode))
-
 (require 'my-irc-mode)
 (require 'my-java-mode)
 (require 'my-org-mode)
@@ -90,3 +89,4 @@
 (global-set-key (kbd "C-c b") (ignore-error-wrapper 'windmove-left))
 
 (load "restclient.el")
+(load "epoch-view.el")

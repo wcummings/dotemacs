@@ -233,6 +233,8 @@
                                  restclient-httpie-command
                                  nil
                                  args)))
+      (with-current-buffer process-buffer
+        (epoch-view-turn-on))
       (switch-to-buffer process-buffer))))
 
 (defun httpie-make-header-string (headers)
