@@ -90,3 +90,4 @@
 
 (load "restclient.el")
 (load "epoch-view.el")
+(add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
