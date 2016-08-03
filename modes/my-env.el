@@ -13,9 +13,7 @@
 (add-to-path "/usr/local/bin")
 (add-to-path "/usr/sbin")
 (add-to-path "/sbin")
-(add-to-path "~/ajoke/bin")
 (add-to-path "/usr/local/opt/coreutils/libexec/gnubin")
-
-(add-to-env-var "PERL5LIB" (expand-file-name "~/ajoke/etc/perl"))
+(add-to-path "~/.emacs.d/scripts")
 
 (provide 'my-env)
