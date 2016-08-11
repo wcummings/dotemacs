@@ -8,7 +8,7 @@
   ;;(add-to-list 'completion-styles 'initials t)
   (setq tern-ac-on-dot t)
   (tern-mode t)
-  (require 'autocomplete))
+  (require 'my-auto-complete-mode))
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 (eval-after-load 'tern

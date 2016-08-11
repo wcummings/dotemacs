@@ -1,5 +1,5 @@
 (defun add-to-path (path)
-  (nconc (list (expand-file-name path)) exec-path)
+  (add-to-list 'exec-path (expand-file-name path) t)
   (add-to-env-var "PATH" path))
 
 (defun add-to-env-var (varname value)
