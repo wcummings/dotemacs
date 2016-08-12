@@ -1,9 +1,3 @@
 #!/usr/bin/perl
-my $word = shift;
-my $emoji = shift;
+system("~/.emacs.d/scripts/slack-toilet.sh $_ $ARGV[1]") foreach split(//, $ARGV[0]);
 
-my @a = split //, $word;
-
-foreach my $c (@a) {
-    system("~/.emacs.d/scripts/slack-toilet.sh $c $emoji");
-}
