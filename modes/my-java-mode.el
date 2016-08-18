@@ -28,5 +28,7 @@
 
 (define-key eclim-mode-map (kbd "C-h d") 'eclim-java-browse-documentation-at-point)
 (define-key eclim-mode-map (kbd "M-.") 'eclim-java-find-declaration)
+(define-key eclim-mode-map (kbd "C-c i") 'eclim-java-import-organize)
+(define-key eclim-mode-map (kbd "C-c s") 'eclim-java-find-type)
 
 (provide 'my-java-mode)
