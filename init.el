@@ -11,6 +11,8 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+(setq auto-save-default nil)
+
 (let ((host-settings-file (format "host_settings/%s.el" (downcase system-name))))
   (when (file-exists-p host-settings-file)
     (load host-settings-file)))
@@ -33,6 +35,8 @@
 (setq mouse-wheel-follow-mouse 't)
 
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
+
+(setq browse-url-browser-function 'eww-browse-url)
 
 ;; https://github.com/dunn/company-emoji/blob/master/README.md
 (defun set-emoji-font (frame)
@@ -61,14 +65,14 @@
 (defgroup my-customizations nil
   "Customizations for my .emacs")
 
+(require 'my-auto-complete-mode)
 (require 'my-ido-mode)
 (require 'my-eshell-mode)
 (require 'my-tramp-mode)
 (with-eval-after-load "erlang"
   (require 'my-erlang-mode))
 (require 'my-linum-mode)
-(with-eval-after-load "js2-mode"
-  (require 'my-javascript-mode))
+(require 'my-javascript-mode)
 (with-eval-after-load "lua-mode"
   (require 'my-lua-mode))
 (require 'my-irc-mode)
