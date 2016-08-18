@@ -5,6 +5,7 @@
       (lambda()
 	(setq c-basic-offset 2
 	      indent-tabs-mode nil)
+        (add-hook 'after-save-hook 'eclim-java-import-organize nil 'make-it-local)
 	(local-set-key (kbd "C-x j") 'jump-to-intellij)))
 
 (defun jump-to-intellij ()
@@ -30,5 +31,6 @@
 (define-key eclim-mode-map (kbd "M-.") 'eclim-java-find-declaration)
 (define-key eclim-mode-map (kbd "C-c i") 'eclim-java-import-organize)
 (define-key eclim-mode-map (kbd "C-c s") 'eclim-java-find-type)
+(define-key eclim-mode-map (kbd "C-c p") 'eclim-problems) 
 
 (provide 'my-java-mode)
