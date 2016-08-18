@@ -27,6 +27,6 @@
 (ac-emacs-eclim-config)
 
 (define-key eclim-mode-map (kbd "C-h d") 'eclim-java-browse-documentation-at-point)
-(define-key eclim-mode-map (kbd "M-.") 'eclim-java-browse-documentation-at-point)
+(define-key eclim-mode-map (kbd "M-.") 'eclim-java-find-declaration)
 
 (provide 'my-java-mode)
