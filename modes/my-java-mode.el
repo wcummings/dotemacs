@@ -1,5 +1,6 @@
 (require 'eclim)
 (require 'eclimd)
+(require 'my-eclim-ido-mode)
 
 (setq java-mode-hook
       (lambda()
@@ -29,8 +30,9 @@
 
 (define-key eclim-mode-map (kbd "C-h d") 'eclim-java-browse-documentation-at-point)
 (define-key eclim-mode-map (kbd "M-.") 'eclim-java-find-declaration)
-(define-key eclim-mode-map (kbd "C-c i") 'eclim-java-import-organize)
-(define-key eclim-mode-map (kbd "C-c s") 'eclim-java-find-type)
-(define-key eclim-mode-map (kbd "C-c p") 'eclim-problems) 
+;; (define-key eclim-mode-map (kbd "C-c i") 'eclim-java-import-organize)
+;; (define-key eclim-mode-map (kbd "C-c s") 'eclim-java-find-type)
+;; (define-key eclim-mode-map (kbd "C-c p") 'eclim-problems) 
+(define-key eclim-mode-map (kbd "C-e C-e f l") 'eclim-file-locate-ido)
 
 (provide 'my-java-mode)
