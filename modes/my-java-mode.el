@@ -5,7 +5,7 @@
       (lambda()
 	(setq c-basic-offset 2
 	      indent-tabs-mode nil)
-        (add-hook 'after-save-hook 'eclim-java-import-organize nil 'make-it-local)
+        (add-hook 'before-save-hook 'eclim-java-import-organize nil 'make-it-local)
 	(local-set-key (kbd "C-x j") 'jump-to-intellij)))
 
 (defun jump-to-intellij ()
@@ -29,9 +29,11 @@
 
 (define-key eclim-mode-map (kbd "C-h d") 'eclim-java-browse-documentation-at-point)
 (define-key eclim-mode-map (kbd "M-.") 'eclim-java-find-declaration)
+(global-set-key (kbd "C-c C-e x f") 'eclim-file-locate-incremental)
+
 ;; (define-key eclim-mode-map (kbd "C-c i") 'eclim-java-import-organize)
 ;; (define-key eclim-mode-map (kbd "C-c s") 'eclim-java-find-type)
 ;; (define-key eclim-mode-map (kbd "C-c p") 'eclim-problems) 
-(define-key eclim-mode-map (kbd "C-e C-e f l") 'eclim-file-locate)
+;; (define-key eclim-mode-map (kbd "C-e C-e x f") 'eclim-file-locate-incremental)
 
 (provide 'my-java-mode)
