@@ -5,7 +5,7 @@
       (lambda()
 	(setq c-basic-offset 2
 	      indent-tabs-mode nil)
-        (add-hook 'before-save-hook 'eclim-java-import-organize nil 'make-it-local)
+        ;; (add-hook 'before-save-hook 'eclim-java-import-organize nil 'make-it-local)
 	(local-set-key (kbd "C-x j") 'jump-to-intellij)))
 
 (defun jump-to-intellij ()
