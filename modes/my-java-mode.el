@@ -29,7 +29,7 @@
 
 (define-key eclim-mode-map (kbd "C-h d") 'eclim-java-browse-documentation-at-point)
 (define-key eclim-mode-map (kbd "M-.") 'eclim-java-find-declaration)
-(global-set-key (kbd "M-s x f") 'eclim-file-locate-incremental)
+(global-set-key (kbd "M-s j") 'eclim-file-locate-incremental)
 
 ;; (define-key eclim-mode-map (kbd "C-c i") 'eclim-java-import-organize)
 ;; (define-key eclim-mode-map (kbd "C-c s") 'eclim-java-find-type)
