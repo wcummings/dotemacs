@@ -14,8 +14,7 @@
 		     lua-mode
 		     misc-cmds
 		     chess
-		     rainbow-delimiters
-                     emacs-eclim))
+		     rainbow-delimiters))
 
 (package-initialize)
 (unless package-archive-contents

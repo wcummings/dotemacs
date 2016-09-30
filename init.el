@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (add-to-list 'load-path "~/.emacs.d/modes")
 (add-to-list 'load-path "~/.emacs.d/lib")
 (require 'my-env)
@@ -52,16 +59,6 @@
   (save-excursion
     (indent-region (point-min) (point-max) nil)))
 
-;; https://www.emacswiki.org/emacs/WindMove
-(defun ignore-error-wrapper (fn)
-  "Funtion return new function that ignore errors.
-   The function wraps a function with `ignore-errors' macro."
-  (lexical-let ((fn fn))
-    (lambda ()
-      (interactive)
-      (ignore-errors
-        (funcall fn)))))
-
 (defgroup my-customizations nil
   "Customizations for my .emacs")
 
@@ -87,11 +84,5 @@
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-c n") (ignore-error-wrapper 'windmove-down))
-(global-set-key (kbd "C-c p") (ignore-error-wrapper 'windmove-up))
-(global-set-key (kbd "C-c f") (ignore-error-wrapper 'windmove-right))
-(global-set-key (kbd "C-c b") (ignore-error-wrapper 'windmove-left))
 
-(load "restclient.el")
-(load "epoch-view.el")
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
