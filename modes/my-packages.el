@@ -15,7 +15,8 @@
 		     misc-cmds
 		     chess
 		     rainbow-delimiters
-                     elfeed))
+                     elfeed
+                     dash))
 
 (package-initialize)
 (unless package-archive-contents
