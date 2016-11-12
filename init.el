@@ -43,8 +43,6 @@
 
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
 
-(setq browse-url-browser-function 'eww-browse-url)
-
 ;; https://github.com/dunn/company-emoji/blob/master/README.md
 (defun set-emoji-font (frame)
   (if (eq system-type 'darwin)
@@ -61,6 +59,19 @@
 
 (defgroup my-customizations nil
   "Customizations for my .emacs")
+
+(defcustom my-firefox-urls nil
+  "List of matches for URLs to open in Firefox instead of EWW"
+  :type '(list)
+  :group 'my-customizations)
+
+(defun my-browse-url (url &optional new-window)
+  (apply
+   (if (--any (string-match it url) my-firefox-urls) 'browse-url-default-macosx-browser 'eww-browse-url)
+   url
+   new-window))
+
+(setq browse-url-browser-function 'my-browse-url)
 
 (require 'my-auto-complete-mode)
 (require 'my-ido-mode)
@@ -84,5 +95,6 @@
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x w") 'elfeed)
 
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
