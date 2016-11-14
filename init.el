@@ -80,6 +80,8 @@
 (require 'my-elisp-mode)
 (require 'skeletons)
 
+(require 'restclient)
+(require 'epoch-view)
 (require 'rotate-windows)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)

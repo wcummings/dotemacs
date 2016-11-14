@@ -207,9 +207,10 @@
     (setq restclient-within-call t)
     (setq restclient-request-time-start (current-time))
     (run-hooks 'restclient-http-do-hook)
-    (httpie-retrieve url (if restclient-same-buffer-response
-                             restclient-same-buffer-response-name
-                           (format "HTTP %s %s" method url)))))
+    (url-retrieve url 'restclient-http-handle-response
+                  (append (list method url (if restclient-same-buffer-response
+                                               restclient-same-buffer-response-name
+                                             (format "*HTTP %s %s*" method url))) handle-args) nil restclient-inhibit-cookies)))
 
 (defun httpie-retrieve (url buffer)
   (let* ((header-string (httpie-make-header-string url-request-extra-headers))
