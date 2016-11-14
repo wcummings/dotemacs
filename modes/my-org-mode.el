@@ -1,6 +1,10 @@
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
 (setq org-directory "~/org/")
+
+(unless (file-exists-p org-directory)
+  (make-directory org-directory))
+
 (setq rel-org-agenda-files '("todo.org" "gcal-agenda.org" "work.org"))
 (setq org-log-done 'time)
 (setq org-completion-use-ido 't)
