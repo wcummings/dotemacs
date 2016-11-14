@@ -16,7 +16,7 @@
 		     chess
 		     rainbow-delimiters
                      elfeed
-                     dash))
+                     flycheck))
 
 (package-initialize)
 (unless package-archive-contents

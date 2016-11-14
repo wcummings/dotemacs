@@ -90,6 +90,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
 
+(global-flycheck-mode)
+
 ;; from quicklisp
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 ;; Replace "sbcl" with the path to your implementation
