@@ -60,18 +60,9 @@
 (defgroup my-customizations nil
   "Customizations for my .emacs")
 
-(defcustom my-firefox-urls nil
-  "List of matches for URLs to open in Firefox instead of EWW"
-  :type '(list)
-  :group 'my-customizations)
-
-(defun my-browse-url (url &optional new-window)
-  (apply
-   (if (--any (string-match it url) my-firefox-urls) 'browse-url-default-macosx-browser 'eww-browse-url)
-   url
-   new-window))
-
-(setq browse-url-browser-function 'my-browse-url)
+(setq browse-url-browser-function
+      '(("reddit" . browse-url-firefox)
+        ("." . eww-browse-url)))
 
 (require 'my-auto-complete-mode)
 (require 'my-ido-mode)
@@ -98,3 +89,8 @@
 (global-set-key (kbd "C-x w") 'elfeed)
 
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
+
+;; from quicklisp
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+;; Replace "sbcl" with the path to your implementation
+(setq inferior-lisp-program "sbcl")
