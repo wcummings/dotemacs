@@ -16,7 +16,8 @@
 		     chess
 		     rainbow-delimiters
                      elfeed
-                     flycheck))
+                     flycheck
+                     restclient-mode))
 
 (package-initialize)
 (unless package-archive-contents
