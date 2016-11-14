@@ -1,5 +1,6 @@
 (require 'eshell)
 (require 'em-smart)
+(require 'em-tramp)
 ;; (setq eshell-where-to-jump 'begin)
 ;; (setq eshell-review-quick-commands nil)
 ;; (setq eshell-smart-space-goes-to-end t)
@@ -71,5 +72,9 @@
   (eshell-smart-initialize))
 
 (add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
+
+;; remember sudo pw for an hour
+(setq password-cache t)
+(setq password-cache-expiry 3600)
 
 (provide 'my-eshell-mode)
