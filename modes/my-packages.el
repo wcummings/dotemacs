@@ -17,7 +17,8 @@
 		     rainbow-delimiters
                      elfeed
                      flycheck
-                     restclient))
+                     restclient
+                     paredit))
 
 (package-initialize)
 (unless package-archive-contents
