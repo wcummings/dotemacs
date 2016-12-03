@@ -98,3 +98,8 @@
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 ;; Replace "sbcl" with the path to your implementation
 (setq inferior-lisp-program "sbcl")
+
+;; automatically mark old entries as read
+(add-hook 'elfeed-new-entry-hook
+          (elfeed-make-tagger :before "1 weeks ago"
+                              :remove 'unread))
