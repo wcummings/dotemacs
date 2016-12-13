@@ -99,7 +99,9 @@
 ;; Replace "sbcl" with the path to your implementation
 (setq inferior-lisp-program "sbcl")
 
+(require 'elfeed)
 ;; automatically mark old entries as read
 (add-hook 'elfeed-new-entry-hook
           (elfeed-make-tagger :before "1 weeks ago"
                               :remove 'unread))
+
