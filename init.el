@@ -83,6 +83,9 @@
 (require 'restclient)
 (require 'epoch-view)
 (require 'rotate-windows)
+
+(eval-after-load 'rcirc '(require 'rcirc-color))
+
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
