@@ -108,3 +108,6 @@
           (elfeed-make-tagger :before "1 weeks ago"
                               :remove 'unread))
 
+(require 'virtualenvwrapper)
+(venv-initialize-eshell)
+(setq venv-location "~/.virtualenv/")

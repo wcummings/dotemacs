@@ -18,7 +18,8 @@
                      elfeed
                      flycheck
                      restclient
-                     paredit))
+                     paredit
+                     virtualenvwrapper))
 
 (package-initialize)
 (unless package-archive-contents
