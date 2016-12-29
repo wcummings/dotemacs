@@ -75,6 +75,6 @@
               (mapcar (lambda (item)
                         (concat "[ ] " (upcase item)))
                       choices)
-              " ")))))
+              "  ")))))
 
 (provide 'my-irc-mode)
