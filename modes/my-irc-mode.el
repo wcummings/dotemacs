@@ -63,4 +63,18 @@
   (interactive)
   (rcirc-send-message process target (concat "\002" text "\002")))
 
+(defun-rcirc-command survey (text)
+  "Survey people"
+  (interactive)
+  (let* ((fragments (split-string text ","))
+         (query (car fragments))
+         (choices (cdr fragments)))
+    (rcirc-send-message process target
+     (concat (upcase query) ": "
+             (string-join
+              (mapcar (lambda (item)
+                        (concat "[ ] " (upcase item)))
+                      choices)
+              " ")))))
+
 (provide 'my-irc-mode)
