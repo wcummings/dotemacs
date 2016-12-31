@@ -790,7 +790,7 @@ Function is called with PROCESS, COMMAND, SENDER, ARGS and LINE.")
 	    (funcall handler process sender args text))
 	  (run-hook-with-args 'rcirc-receive-message-functions
 			      process cmd sender args text))
-	(when (and tags (string= cmd "PRIVMSG"))
+	(when tags
 	  (let* ((parsed-tags (rcirc-parse-tags tags))
 		(time (cdr (assoc "time" parsed-tags)))
 		(timestamp (floor (float-time (date-to-time time)))))
