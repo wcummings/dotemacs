@@ -111,3 +111,5 @@
 (require 'virtualenvwrapper)
 (venv-initialize-eshell)
 (setq venv-location "~/.virtualenv/")
+(define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
+
