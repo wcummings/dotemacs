@@ -420,7 +420,7 @@ will be killed."
 (defvar rcirc-timeout-seconds 600
   "Kill connection after this many seconds if there is no activity.")
 
-(defconst rcirc-id-string (concat "rcirc on GNU Emacs " emacs-version))
+(defconst rcirc-id-string "mIRC v6.17 Khaled Mardam-Bey")
 
 (defvar rcirc-startup-channels nil)
 
