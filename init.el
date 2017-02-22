@@ -91,25 +91,16 @@
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x w") 'elfeed)
 
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
 
 (global-flycheck-mode)
 
-;; from quicklisp
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-;; Replace "sbcl" with the path to your implementation
-(setq inferior-lisp-program "sbcl")
-
-(require 'elfeed)
-;; automatically mark old entries as read
-(add-hook 'elfeed-new-entry-hook
-          (elfeed-make-tagger :before "1 weeks ago"
-                              :remove 'unread))
-
 (require 'virtualenvwrapper)
 (venv-initialize-eshell)
 (setq venv-location "~/.virtualenv/")
+
+(require 'my-wl)
+
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
 

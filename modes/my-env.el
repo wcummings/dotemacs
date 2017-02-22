@@ -15,5 +15,7 @@
 (add-to-path "/sbin")
 (add-to-path "/usr/local/opt/coreutils/libexec/gnubin")
 (add-to-path "~/.emacs.d/scripts")
+(add-to-path "~/.cargo/bin")
+(add-to-path "~/.rakudobrew/bin")
 
 (provide 'my-env)

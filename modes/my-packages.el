@@ -15,11 +15,12 @@
 		     misc-cmds
 		     chess
 		     rainbow-delimiters
-                     elfeed
                      flycheck
                      restclient
                      paredit
-                     virtualenvwrapper))
+                     virtualenvwrapper
+                     rust-mode
+                     cargo))
 
 (package-initialize)
 (unless package-archive-contents
