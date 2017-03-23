@@ -71,6 +71,8 @@
          (files (nreverse
                  (org-publish-get-base-files project exclude-regexp)))
          (sitemap-filename (concat dir (or sitemap-filename "sitemap.org")))
+         (sitemap-sans-extension
+          (plist-get project-plist :sitemap-sans-extension))
          (visiting (find-buffer-visiting sitemap-filename))
          file sitemap-buffer)
     (let ((sitemap-entries (get-sitemap-entries files dir)))
