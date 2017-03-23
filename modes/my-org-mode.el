@@ -105,6 +105,7 @@ Published: %s
 
 ;; adapted from https://raw.githubusercontent.com/steckerhalter/org-mode-blog/master/elisp/index.el
 (defun get-sitemap-entries (files dir)
+  "Hydrate sitemap entries with custom keywords"
   (let (entries)
     (dolist (file files)
       (catch 'stop
