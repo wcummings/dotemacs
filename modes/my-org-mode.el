@@ -67,13 +67,10 @@
          (sitemap-title (plist-get project-plist :sitemap-title))
          (dir (file-name-as-directory
                (plist-get project-plist :base-directory)))
-         (localdir (file-name-directory dir))
          (exclude-regexp (plist-get project-plist :exclude))
          (files (nreverse
                  (org-publish-get-base-files project exclude-regexp)))
          (sitemap-filename (concat dir (or sitemap-filename "sitemap.org")))
-         (sitemap-sans-extension
-          (plist-get project-plist :sitemap-sans-extension))
          (visiting (find-buffer-visiting sitemap-filename))
          file sitemap-buffer)
     (let ((sitemap-entries (get-sitemap-entries files dir)))
@@ -84,15 +81,14 @@
         (erase-buffer)
         (insert (format "#+TITLE: %s\n\n" sitemap-title))
         (dolist (entry sitemap-entries)
-          ;; (message (format "%s" entry))
           (insert
            (format "* [[file:%s][%s]]
 :PROPERTIES:
 :PUBDATE: %s
 :RSS_PERMALINK: %s
 :END:
-%s
-Last update: %s
+%s\\\\\\\\
+Last update: %s\\\\
 Published: %s
 "
                    (plist-get entry :path)
@@ -100,7 +96,6 @@ Published: %s
                    (format-time-string (cdr org-time-stamp-formats) (plist-get entry :parsed-date))
                    (concat (file-name-sans-extension (plist-get entry :path)) ".html")
                    (plist-get entry :description)
-                   (plist-get entry :path)
                    (format-time-string "%Y-%m-%d %H:%M" (plist-get entry :git-date))
                    (format-time-string "%Y-%m-%d" (plist-get entry :parsed-date)))))
         (save-buffer)))
@@ -111,8 +106,7 @@ Published: %s
   (let (entries)
     (dolist (file files)
       (catch 'stop
-        (let* (
-               (env (org-combine-plists
+        (let* ((env (org-combine-plists
                      (org-babel-with-temp-filebuffer file (org-export-get-environment))))
                (date (or (apply 'encode-time (org-parse-time-string
                                               (or (car (plist-get env :date)) (throw 'stop nil))))))
@@ -126,6 +120,14 @@ Published: %s
           (push env entries))))
     (sort entries (lambda (a b) (time-less-p (plist-get b :parsed-date) (plist-get a :parsed-date))))))
 
+(defun my-org-get-keywords ()
+  (org-element-map (org-element-parse-buffer 'element) 'keyword
+    (lambda (keyword) (cons (org-element-property :key keyword)
+                            (org-element-property :value keyword)))))
+
+(defun my-org-get-keyword (keyword)
+  (cdr (assoc keyword (my-org-get-keywords))))
+
 (defun org-mode-blog-prepare (project-plist)
   "`index.org' should always be exported so touch the file before publishing."
   (let* ((base-directory (plist-get project-plist :base-directory))
@@ -134,14 +136,6 @@ Published: %s
       (set-buffer-modified-p t)
       (save-buffer 0))
     (kill-buffer buffer)))
-
-(defun my-org-get-keywords ()
-  (org-element-map (org-element-parse-buffer 'element) 'keyword
-    (lambda (keyword) (cons (org-element-property :key keyword)
-                            (org-element-property :value keyword)))))
-
-(defun my-org-get-keyword (keyword)
-  (cdr (assoc keyword (my-org-get-keywords))))
 
 (setq org-publish-project-alist
       `(("blog-pages"
@@ -153,7 +147,6 @@ Published: %s
          :auto-sitemap t
          :sitemap-title "Blog"
          ;; :sitemap-sort-files anti-chronologically
-         ;; :sitemap-file-entry-format "%d %t"
          :sitemap-filename "index.org"
          :sitemap-function my-sitemap-publish
          :with-toc nil
