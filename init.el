@@ -78,7 +78,6 @@
 (require 'my-java-mode)
 (require 'my-org-mode)
 (require 'my-elisp-mode)
-(require 'skeletons)
 
 (require 'restclient)
 (require 'epoch-view)
@@ -103,4 +102,3 @@
 (require 'my-wl)
 
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
-

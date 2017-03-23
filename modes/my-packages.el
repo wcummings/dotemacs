@@ -4,7 +4,6 @@
 
 (setq package-list '(magit
 		     erlang
-		     skeletor
 		     js2-mode
 		     edts
 		     tern
