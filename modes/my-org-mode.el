@@ -83,7 +83,26 @@
                   (or visiting (find-file sitemap-filename))))
         (erase-buffer)
         (insert (format "#+TITLE: %s\n\n" sitemap-title))
-        (insert-sitemap-entries sitemap-entries)
+        (dolist (entry sitemap-entries)
+          ;; (message (format "%s" entry))
+          (insert
+           (format "* [[file:%s][%s]]
+:PROPERTIES:
+:PUBDATE: %s
+:RSS_PERMALINK: %s
+:END:
+%s
+Last update: %s
+Published: %s
+"
+                   (plist-get entry :path)
+                   (car (plist-get entry :title))
+                   (format-time-string (cdr org-time-stamp-formats) (plist-get entry :parsed-date))
+                   (concat (file-name-sans-extension (plist-get entry :path)) ".html")
+                   (plist-get entry :description)
+                   (plist-get entry :path)
+                   (format-time-string "%Y-%m-%d %H:%M" (plist-get entry :git-date))
+                   (format-time-string "%Y-%m-%d" (plist-get entry :parsed-date)))))
         (save-buffer)))
     (or visiting (kill-buffer sitemap-buffer))))
 
@@ -98,32 +117,14 @@
                (date (or (apply 'encode-time (org-parse-time-string
                                               (or (car (plist-get env :date)) (throw 'stop nil))))))
                (git-date (date-to-time (magit-git-string "log" "-1" "--format=%ci" file)))
-               (path (file-relative-name file dir)))
+               (path (file-relative-name file dir))
+               (description (my-org-get-keyword "DESCRIPTION")))
           (plist-put env :path path)
           (plist-put env :parsed-date date)
           (plist-put env :git-date git-date)
+          (plist-put env :description description)
           (push env entries))))
     (sort entries (lambda (a b) (time-less-p (plist-get b :parsed-date) (plist-get a :parsed-date))))))
-
-(defun insert-sitemap-entries (entries)
-  (dolist (entry entries)
-    (insert
-     (format "* [[file:%s][%s]]
-:PROPERTIES:
-:PUBDATE: %s
-:RSS_PERMALINK: %s
-:END:
-%s
-Last update: %s
-Published: %s
-"
-             (plist-get entry :path)
-             (car (plist-get entry :title))
-             (format-time-string (cdr org-time-stamp-formats) (plist-get entry :parsed-date))
-             (concat (file-name-sans-extension (plist-get entry :path)) ".html")
-             (plist-get entry :description)
-             (format-time-string "%Y-%m-%d %H:%M" (plist-get entry :git-date))
-             (format-time-string "%Y-%m-%d" (plist-get entry :parsed-date))))))
 
 (defun org-mode-blog-prepare (project-plist)
   "`index.org' should always be exported so touch the file before publishing."
@@ -133,6 +134,14 @@ Published: %s
       (set-buffer-modified-p t)
       (save-buffer 0))
     (kill-buffer buffer)))
+
+(defun my-org-get-keywords ()
+  (org-element-map (org-element-parse-buffer 'element) 'keyword
+    (lambda (keyword) (cons (org-element-property :key keyword)
+                            (org-element-property :value keyword)))))
+
+(defun my-org-get-keyword (keyword)
+  (cdr (assoc keyword (my-org-get-keywords))))
 
 (setq org-publish-project-alist
       `(("blog-pages"
