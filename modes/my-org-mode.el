@@ -92,14 +92,13 @@
   (let (entries)
     (dolist (file files)
       (catch 'stop
-        (let* ((env (org-combine-plists (org-babel-with-temp-filebuffer file (org-export-get-environment))))
+        (let* (
+               (env (org-combine-plists
+                     (org-babel-with-temp-filebuffer file (org-export-get-environment))))
                (date (or (apply 'encode-time (org-parse-time-string
                                               (or (car (plist-get env :date)) (throw 'stop nil))))))
                (git-date (date-to-time (magit-git-string "log" "-1" "--format=%ci" file)))
-               ;; HACK: there must be a better way to get the relative path for an internal link
-               ;;       worst case we can write our own function to iterate over posts/*.org
-               ;;       instead of relying on org-publish-get-base-files
-               (path (replace-regexp-in-string (regexp-quote (expand-file-name localdir)) "" file)))
+               (path (file-relative-name file dir)))
           (plist-put env :path path)
           (plist-put env :parsed-date date)
           (plist-put env :git-date git-date)
@@ -108,7 +107,6 @@
 
 (defun insert-sitemap-entries (entries)
   (dolist (entry entries)
-    (message (format "--> %s" entry))
     (insert
      (format "* [[file:%s][%s]]
 :PROPERTIES:
@@ -127,7 +125,7 @@ Published: %s
              (format-time-string "%Y-%m-%d %H:%M" (plist-get entry :git-date))
              (format-time-string "%Y-%m-%d" (plist-get entry :parsed-date))))))
 
-(defun org-mode-blog-prepare ()
+(defun org-mode-blog-prepare (project-plist)
   "`index.org' should always be exported so touch the file before publishing."
   (let* ((base-directory (plist-get project-plist :base-directory))
          (buffer (find-file-noselect (expand-file-name "index.org" base-directory) t)))
@@ -146,7 +144,7 @@ Published: %s
          :auto-sitemap t
          :sitemap-title "Blog"
          ;; :sitemap-sort-files anti-chronologically
-         :sitemap-file-entry-format "%d %t"
+         ;; :sitemap-file-entry-format "%d %t"
          :sitemap-filename "index.org"
          :sitemap-function my-sitemap-publish
          :with-toc nil
@@ -163,7 +161,7 @@ Published: %s
          :base-directory ,blog-base-directory
          :base-extension "org"
          :publishing-directory ,my-org-mode-blog-url
-         :publishing-function (org-rss-publish-to-rss)
+         :publishing-function org-rss-publish-to-rss
          :html-link-home ,blog-home-link
          :html-link-use-abs-url t
          :include ("index.org")
