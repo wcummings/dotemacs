@@ -160,7 +160,8 @@ Published: %s
          :html-link-up ,blog-home-link
          :recursive t
          :preparation-function org-mode-blog-prepare
-         :html-preamble ,my-html-preamble)
+         :html-preamble ,my-html-preamble
+         :html-postamble nil)
         ("blog-images"
          :base-directory ,(concat blog-base-directory "/images")
          :base-extension "jpg\\|gif\\|png"
