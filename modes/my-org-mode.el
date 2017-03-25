@@ -114,7 +114,7 @@ Published: %s
                                               (or (car (plist-get env :date)) (throw 'stop nil))))))
                (git-date (date-to-time (magit-git-string "log" "-1" "--format=%ci" file)))
                (path (file-relative-name file dir))
-               (description (my-org-get-keyword "DESCRIPTION")))
+               (description (org-babel-with-temp-filebuffer file (my-org-get-keyword "DESCRIPTION"))))
           (plist-put env :path path)
           (plist-put env :parsed-date date)
           (plist-put env :git-date git-date)
