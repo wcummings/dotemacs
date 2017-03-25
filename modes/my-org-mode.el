@@ -108,8 +108,7 @@ Published: %s
   (let (entries)
     (dolist (file files)
       (catch 'stop
-        (let* ((env (org-combine-plists
-                     (org-babel-with-temp-filebuffer file (org-export-get-environment))))
+        (let* ((env (org-combine-plists (org-babel-with-temp-filebuffer file (org-export-get-environment))))
                (date (or (apply 'encode-time (org-parse-time-string
                                               (or (car (plist-get env :date)) (throw 'stop nil))))))
                (git-date (date-to-time (magit-git-string "log" "-1" "--format=%ci" file)))
