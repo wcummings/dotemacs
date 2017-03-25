@@ -89,7 +89,7 @@
 :PUBDATE: %s
 :RSS_PERMALINK: %s
 :END:
-%s\\\\\\\\
+%s\\\\
 Last update: %s\\\\
 Published: %s
 "
@@ -98,14 +98,13 @@ Published: %s
                    (format-time-string (cdr org-time-stamp-formats) (plist-get entry :parsed-date))
                    (concat (file-name-sans-extension (plist-get entry :path)) ".html")
                    (plist-get entry :description)
-                   (format-time-string "%Y-%m-%d %H:%M" (plist-get entry :git-date))
+                   (format-time-string "%Y-%m-%d" (plist-get entry :git-date))
                    (format-time-string "%Y-%m-%d" (plist-get entry :parsed-date)))))
         (save-buffer)))
     (or visiting (kill-buffer sitemap-buffer))))
 
-;; adapted from https://raw.githubusercontent.com/steckerhalter/org-mode-blog/master/elisp/index.el
 (defun get-sitemap-entries (files dir)
-  "Hydrate sitemap entries with custom keywords"
+  "Hydrate sitemap entries with custom keywords."
   (let (entries)
     (dolist (file files)
       (catch 'stop
@@ -140,6 +139,10 @@ Published: %s
       (save-buffer 0))
     (kill-buffer buffer)))
 
+(setq my-html-preamble (format "<a href=\"%s\"><img src=\"%s\" style=\"border: 0\" width=\"16\" height=\"16\" /></a>"
+                               (concat blog-home-link "index.xml")
+                               (concat blog-home-link "images/feed-icon.png")))
+
 (setq org-publish-project-alist
       `(("blog-pages"
          :base-directory ,blog-base-directory
@@ -153,15 +156,17 @@ Published: %s
          :sitemap-filename "index.org"
          :sitemap-function my-sitemap-publish
          :with-toc nil
-         :html-link-home "/"
-         :html-link-up "/"
+         :html-link-home ,blog-home-link
+         :html-link-up ,blog-home-link
          :recursive t
-         :preparation-function org-mode-blog-prepare)
+         :preparation-function org-mode-blog-prepare
+         :html-preamble ,my-html-preamble)
         ("blog-images"
-         :base-directory ,blog-base-directory
+         :base-directory ,(concat blog-base-directory "/images")
          :base-extension "jpg\\|gif\\|png"
-         :publishing-directory ,my-org-mode-blog-url
-         :publishing-function org-publish-attachment)
+         :publishing-directory ,(concat my-org-mode-blog-url "/images")
+         :publishing-function org-publish-attachment
+         :recursive t)
         ("blog-rss"
          :base-directory ,blog-base-directory
          :base-extension "org"
