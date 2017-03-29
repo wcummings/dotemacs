@@ -8,8 +8,8 @@
 
 (setq eshell-aliases-file "~/.emacs.d/eshell.aliases")
 
-(defun eshell/up (n)
-  (dotimes (i n) (cd "..")))
+(defun eshell/up (&optional n)
+  (dotimes (i (or n 1)) (cd "..")))
 
 (defun eshell/~ ()
   (cd "~"))
