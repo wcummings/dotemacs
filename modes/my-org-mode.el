@@ -167,6 +167,12 @@ Published: %s
          :publishing-directory ,(concat my-org-mode-blog-url "/images")
          :publishing-function org-publish-attachment
          :recursive t)
+        ("blog-attachments"
+         :base-directory ,(concat blog-base-directory "/attachments")
+         :base-extension ".*"
+         :publishing-directory ,(concat my-org-mode-blog-url "/attachments")
+         :publishing-function org-publish-attachment
+         :recursive t)
         ("blog-rss"
          :base-directory ,blog-base-directory
          :base-extension "org"
@@ -176,7 +182,7 @@ Published: %s
          :html-link-use-abs-url t
          :include ("index.org")
          :exclude ".*")
-        ("blog" :components ("blog-pages" "blog-images" "blog-rss"))))
+        ("blog" :components ("blog-pages" "blog-images" "blog-attachments" "blog-rss"))))
 
 (setq org-src-fontify-natively t)
 
