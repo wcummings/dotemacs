@@ -10,8 +10,13 @@
 (define-minor-mode dnd-mode
   "A minor mode for D&D"
   :lighter " D&D"
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-c C-r") 'dnd-mode-roll-at-point)
+            map)
   (if dnd-mode
-      (dnd-mode-highlight-dice-rolls)
+      (progn
+        (dnd-mode-highlight-dice-rolls)
+        (button-lock-mode))
     (dnd-mode-unhighlight-dice-rolls)))
 
 (defun dnd-mode-highlight-dice-rolls ()
@@ -23,13 +28,20 @@
                       spec-string
                       (lambda ()
                         (interactive)
-                        (let ((buffer-read-only t))
-                         (decide-roll-dice spec-string)))
+                        (dnd-mode-roll-dice spec-string))
                       :face 'link :face-policy 'prepend))))))
 
 (defun dnd-mode-unhighlight-dice-rolls ()
   (dolist (button *dnd-mode-buttons*)
     (button-lock-unset-button button))
   (setq *dnd-buttons* '()))
+
+(defun dnd-mode-roll-dice (spec-string)
+  (let ((buffer-read-only t))
+    (decide-roll-dice spec-string)))
+
+(defun dnd-mode-roll-at-point ()
+  (interactive)
+  (dnd-mode-roll-dice (thing-at-point 'word)))
 
 (provide 'dnd-mode)
