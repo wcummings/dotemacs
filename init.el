@@ -82,7 +82,7 @@
 (require 'restclient)
 (require 'epoch-view)
 (require 'rotate-windows)
-(require 'org-dnd)
+(require 'dnd-mode)
 
 (eval-after-load 'rcirc '(require 'rcirc-color))
 
