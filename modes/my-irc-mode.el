@@ -1,5 +1,11 @@
-(load "~/.emacs.d/lib/rcirc.el")
+;;(load "~/.emacs.d/lib/rcirc.el")
+(require 'rcirc)
 (require 'notifications)
+
+(defvar rcirc-last-v3-server-message-time nil) ; ircv3 time property
+(setq rcirc-last-v3-server-message-time-file "~/.emacs.d/.rcirc-last-v3-server-message-time")
+(setq rcirc-last-v3-server-message-time-initial nil)
+
 
 (defcustom my-irc-mode-znc-host nil
   "ZNC host"
@@ -64,6 +70,29 @@
   (interactive)
   (rcirc-send-message process target (concat "\002" text "\002")))
 
+(advice-add 'rcirc-process-server-response-1 :around 'rcirc-process-server-response-advice)
+(advice-add 'rcirc-connect :before 'rcirc-pre-connect-advice)
+(advice-add 'rcirc-connect :after 'rcirc-post-connect-advice)
+
+(defun rcirc-process-server-response-advice (orig-fun &rest args)
+  (let ((text (cadr args)))
+    (if (string-match "^\\(@\\([^ ]+\\) \\)?\\(\\(:[^ ]+ \\)?[^ ]+ .+\\)$" text)
+          (let ((tags (match-string 2 text))
+                (rest (match-string 3 text)))
+            (when tags
+             (rcirc-handle-message-tags (rcirc-parse-tags tags)))
+            (apply orig-fun (list (car args) rest)))
+      (apply orig-fun args))))
+
+(defun rcirc-pre-connect-advice (&rest args)
+  (when (file-exists-p rcirc-last-v3-server-message-time-file)
+    (setq rcirc-last-v3-server-message-time-initial
+          (with-temp-buffer (insert-file-contents rcirc-last-v3-server-message-time-file)
+                            (read (current-buffer))))))
+
+(defun rcirc-post-connect-advice (&rest args)
+  (rcirc-send-string (rcirc-buffer-process) "CAP REQ znc.in/playback"))
+
 (add-hook 'rcirc-receive-message-functions 'rcirc-do-notifications-hook)
 
 (defun rcirc-do-notifications-hook (process cmd sender args text)
@@ -78,5 +107,28 @@
                                          "\\b")
                                  message)))
       (notifications-notify :title sender :body message))))
+
+(defun rcirc-parse-tags (tags)
+  "Parse TAGS message prefix."
+  (mapcar (lambda (tag)
+            (let ((p (split-string tag "=")))
+              `(,(car p) . ,(cadr p))))
+          (split-string tags ";")))
+
+(defun rcirc-handle-message-tags (tags)
+  (let* ((time (cdr (assoc "time" tags)))
+         (timestamp (floor (float-time (date-to-time time)))))
+    (setq rcirc-last-v3-server-message-time timestamp)
+    (with-temp-file rcirc-last-v3-server-message-time-file
+      (insert (with-output-to-string (princ rcirc-last-v3-server-message-time))))))
+
+(defun rcirc-handler-CAP (process sender args text)
+  (rcirc-check-auth-status process sender args text)
+  (let ((response (second args))
+	(capab (third args)))
+    (when (and rcirc-last-v3-server-message-time-initial
+	       (string= response "ACK")
+	       (string= capab "znc.in/playback"))
+      (rcirc-send-privmsg process "*playback" (format "Play * %d" (+ rcirc-last-v3-server-message-time-initial 1))))))
 
 (provide 'my-irc-mode)
