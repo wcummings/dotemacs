@@ -108,8 +108,7 @@
                                          (regexp-quote nick)
                                          "\\b")
                                  message)))
-      ;(notifications-notify :title sender :body message)
-      )))
+      (notifications-notify :title sender :body message))))
 
 (defun rcirc-parse-tags (tags)
   "Parse TAGS message prefix."
@@ -132,7 +131,6 @@
     (when (and *rcirc-last-message-time-initial*
 	       (string= response "ACK")
 	       (string= capab "znc.in/playback"))
-      (message (format "initial = %s"  *rcirc-last-message-time-initial*))
       (rcirc-send-privmsg process "*playback" (format "Play * %d" (+ *rcirc-last-message-time-initial* 1))))))
 
 (provide 'my-irc-mode)
