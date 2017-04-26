@@ -1,11 +1,9 @@
-;;(load "~/.emacs.d/lib/rcirc.el")
 (require 'rcirc)
 (require 'notifications)
 
-(defvar rcirc-last-v3-server-message-time nil) ; ircv3 time property
-(setq rcirc-last-v3-server-message-time-file "~/.emacs.d/.rcirc-last-v3-server-message-time")
-(setq rcirc-last-v3-server-message-time-initial nil)
-
+(defvar *rcirc-last-message-time* nil)
+(defvar *rcirc-last-message-time-file* "~/.emacs.d/.rcirc-last-v3-server-message-time")
+(defvar *rcirc-last-message-time-initial* nil)
 
 (defcustom my-irc-mode-znc-host nil
   "ZNC host"
@@ -85,9 +83,9 @@
       (apply orig-fun args))))
 
 (defun rcirc-pre-connect-advice (&rest args)
-  (when (file-exists-p rcirc-last-v3-server-message-time-file)
-    (setq rcirc-last-v3-server-message-time-initial
-          (with-temp-buffer (insert-file-contents rcirc-last-v3-server-message-time-file)
+  (when (file-exists-p *rcirc-last-message-time-file*)
+    (setq *rcirc-last-message-time-initial*
+          (with-temp-buffer (insert-file-contents *rcirc-last-message-time-file*)
                             (read (current-buffer))))))
 
 (defun rcirc-post-connect-advice (&rest args)
@@ -118,17 +116,17 @@
 (defun rcirc-handle-message-tags (tags)
   (let* ((time (cdr (assoc "time" tags)))
          (timestamp (floor (float-time (date-to-time time)))))
-    (setq rcirc-last-v3-server-message-time timestamp)
-    (with-temp-file rcirc-last-v3-server-message-time-file
-      (insert (with-output-to-string (princ rcirc-last-v3-server-message-time))))))
+    (setq *rcirc-last-message-time* timestamp)
+    (with-temp-file *rcirc-last-message-time-file*
+      (insert (with-output-to-string (princ *rcirc-last-message-time*))))))
 
 (defun rcirc-handler-CAP (process sender args text)
   (rcirc-check-auth-status process sender args text)
   (let ((response (second args))
 	(capab (third args)))
-    (when (and rcirc-last-v3-server-message-time-initial
+    (when (and *rcirc-last-message-time-initial*
 	       (string= response "ACK")
 	       (string= capab "znc.in/playback"))
-      (rcirc-send-privmsg process "*playback" (format "Play * %d" (+ rcirc-last-v3-server-message-time-initial 1))))))
+      (rcirc-send-privmsg process "*playback" (format "Play * %d" (+ *rcirc-last-message-time-initial* 1))))))
 
 (provide 'my-irc-mode)
