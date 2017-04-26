@@ -1,4 +1,5 @@
 (load "~/.emacs.d/lib/rcirc.el")
+(require 'notifications)
 
 (defcustom my-irc-mode-znc-host nil
   "ZNC host"
@@ -48,14 +49,14 @@
 
 ;; rcirc only passes a single param, so we need to get more interactively
 (defun-rcirc-command flood (text)
-  "friday flood day"
+  "Flood"
   (interactive)
   (let ((i 0)
 	(count
-	 (string-to-number (read-string "how rude do u wanna be? "))))
+	 (string-to-number (read-string "How many lines? "))))
     (while (< i count)
       (rcirc-send-message process target text)
-      (setq i (+ 1 i)))))
+      (incf i))))
 
 ;; https://www.emacswiki.org/emacs/rcircExampleSettings
 (defun-rcirc-command bold (text)
@@ -63,18 +64,19 @@
   (interactive)
   (rcirc-send-message process target (concat "\002" text "\002")))
 
-(defun-rcirc-command survey (text)
-  "Survey people"
-  (interactive)
-  (let* ((fragments (split-string text ","))
-         (query (car fragments))
-         (choices (cdr fragments)))
-    (rcirc-send-message process target
-     (concat (upcase query) ": "
-             (string-join
-              (mapcar (lambda (item)
-                        (concat "[ ] " (upcase item)))
-                      choices)
-              "  ")))))
+(add-hook 'rcirc-receive-message-functions 'rcirc-do-notifications-hook)
+
+(defun rcirc-do-notifications-hook (process cmd sender args text)
+  (let ((target (car args))
+        (message (cadr args))
+        (nick (rcirc-nick (rcirc-buffer-process))))
+    (when (and (equal cmd "PRIVMSG")
+               (not (equal sender nick))
+               (or (equal target nick)
+                   (string-match (concat "\\b"
+                                         (regexp-quote nick)
+                                         "\\b")
+                                 message)))
+      (notifications-notify :title sender :body message))))
 
 (provide 'my-irc-mode)
