@@ -84,8 +84,6 @@
 (require 'rotate-windows)
 (require 'dnd-mode)
 
-(eval-after-load 'rcirc '(require 'rcirc-color))
-
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
@@ -103,3 +101,7 @@
 (require 'my-wl)
 
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
+
+(projectile-global-mode)
+
+(eshell)
