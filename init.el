@@ -82,7 +82,6 @@
 (require 'restclient)
 (require 'epoch-view)
 (require 'rotate-windows)
-(require 'dnd-mode)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)
