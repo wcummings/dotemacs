@@ -90,6 +90,7 @@
 :RSS_PERMALINK: %s
 :END:
 %s\\\\
+\\\\
 Last update: %s\\\\
 Published: %s
 "
@@ -138,7 +139,8 @@ Published: %s
       (save-buffer 0))
     (kill-buffer buffer)))
 
-(setq my-html-preamble (format "<a href=\"%s\"><img src=\"%s\" style=\"border: 0\" width=\"16\" height=\"16\" /></a>"
+(setq my-html-preamble (format "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" /><a style=\"position: absolute; top: 7px; left: 7px\" href=\"%s\"><img src=\"%s\" style=\"border: 0\" width=\"16\" height=\"16\" /></a>"
+                               (concat blog-home-link "css/styles.css")
                                (concat blog-home-link "index.xml")
                                (concat blog-home-link "images/feed-icon.png")))
 
@@ -161,6 +163,12 @@ Published: %s
          :preparation-function org-mode-blog-prepare
          :html-preamble ,my-html-preamble
          :html-postamble nil)
+        ("blog-styles"
+         :base-directory ,(concat blog-base-directory "/css")
+         :base-extension "css"
+         :publishing-directory ,(concat my-org-mode-blog-url "/css")
+         :publishing-function org-publish-attachment
+         :recursive t)
         ("blog-images"
          :base-directory ,(concat blog-base-directory "/images")
          :base-extension "jpg\\|gif\\|png"
@@ -182,7 +190,7 @@ Published: %s
          :html-link-use-abs-url t
          :include ("index.org")
          :exclude ".*")
-        ("blog" :components ("blog-pages" "blog-images" "blog-attachments" "blog-rss"))))
+        ("blog" :components ("blog-pages" "blog-images" "blog-attachments" "blog-rss" "blog-styles"))))
 
 (setq org-src-fontify-natively t)
 

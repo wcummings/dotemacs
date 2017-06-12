@@ -53,7 +53,7 @@
 
 ;; rcirc only passes a single param, so we need to get more interactively
 (defun-rcirc-command flood (text)
-  "Flood"
+  "Flood TEXT."
   (interactive)
   (let ((i 0)
 	(count
@@ -91,24 +91,10 @@
 (defun rcirc-send-string-advice (orig-fun &rest args)
   (let ((process (car args))
         (text (cadr args)))
-   (when (string-prefix-p "USER " text)
-     (apply orig-fun (list process "CAP REQ znc.in/playback")))
+    (when (string-prefix-p "USER " text)
+      (message "cap req")
+      (apply orig-fun (list process "CAP REQ znc.in/playback")))
    (apply orig-fun args)))
-
-(add-hook 'rcirc-receive-message-functions 'rcirc-do-notifications-hook)
-
-(defun rcirc-do-notifications-hook (process cmd sender args text)
-  (let ((target (car args))
-        (message (cadr args))
-        (nick (rcirc-nick (rcirc-buffer-process))))
-    (when (and (equal cmd "PRIVMSG")
-               (not (equal sender nick))
-               (or (equal target nick)
-                   (string-match (concat "\\b"
-                                         (regexp-quote nick)
-                                         "\\b")
-                                 message)))
-      (notifications-notify :title sender :body message))))
 
 (defun rcirc-parse-tags (tags)
   "Parse TAGS message prefix."
@@ -132,5 +118,21 @@
 	       (string= response "ACK")
 	       (string= capab "znc.in/playback"))
       (rcirc-send-privmsg process "*playback" (format "Play * %d" (+ *rcirc-last-message-time-initial* 1))))))
+
+(add-hook 'rcirc-receive-message-functions 'rcirc-do-notifications-hook)
+
+(defun rcirc-do-notifications-hook (process cmd sender args text)
+  (let ((target (car args))
+        (message (cadr args))
+        (nick rcirc-nick))
+    (when (and (equal cmd "PRIVMSG")
+               (not (equal sender nick))
+               (or (equal target nick)
+                   (string-match (concat "\\b"
+                                         (regexp-quote nick)
+                                         "\\b")
+                                 message)))
+      (message (format "Notify: %s" sender))
+      (notifications-notify :title sender :body message :replace-id sender))))
 
 (provide 'my-irc-mode)

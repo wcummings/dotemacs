@@ -14,6 +14,12 @@
       'wl-draft-kill
       'mail-send-hook))
 
+(setq elmo-imap4-default-server "imap.fastmail.com"
+      elmo-imap4-default-user "will@fastmail.us"
+      elmo-imap4-default-authenticate-type 'clear
+      elmo-imap4-default-port '993
+      elmo-imap4-default-stream-type 'ssl)
+
 (setq wl-smtp-connection-type 'ssl
       wl-smtp-posting-port 465
       wl-smtp-authenticate-type "plain"
@@ -25,5 +31,16 @@
 (setq wl-from "William Cummings <will@fastmail.us>")
 
 (setq wl-default-folder "%inbox")
+
+;; ignore  all fields
+(setq wl-message-ignored-field-list '("^.*:"))
+
+;; ..but these five
+(setq wl-message-visible-field-list
+      '("^To:"
+        "^Cc:"
+        "^From:"
+        "^Subject:"
+        "^Date:"))
 
 (provide 'my-wl)

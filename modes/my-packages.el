@@ -19,8 +19,7 @@
                      restclient
                      paredit
                      virtualenvwrapper
-                     decide
-                     button-lock))
+                     projectile))
 
 (package-initialize)
 (unless package-archive-contents

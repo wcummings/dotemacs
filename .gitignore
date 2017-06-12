@@ -3,3 +3,8 @@ node_modules
 npm-debug.log*
 custom.el
 .rcirc-last-v3-server-message-time
+tramp
+ido.last
+.org-id-locations
+edts/
+elpa/
