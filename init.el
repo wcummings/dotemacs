@@ -78,13 +78,10 @@
 (require 'my-java-mode)
 (require 'my-org-mode)
 (require 'my-elisp-mode)
-
 (require 'restclient)
 (require 'epoch-view)
 (require 'rotate-windows)
 (require 'dnd-mode)
-
-(eval-after-load 'rcirc '(require 'rcirc-color))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)
