@@ -53,6 +53,7 @@
 (add-hook 'after-make-frame-functions 'set-emoji-font)
 
 (defun indent-buffer ()
+  "Indent current buffer."
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max) nil)))
@@ -81,6 +82,7 @@
 (require 'restclient)
 (require 'epoch-view)
 (require 'rotate-windows)
+(require 'multi-scratch)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)
@@ -102,4 +104,5 @@
 
 (projectile-global-mode)
 
-(eshell)
+(cd "~")
+(eshell) ;)
