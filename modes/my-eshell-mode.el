@@ -43,7 +43,8 @@
 ;; just in case
 (defun spawn-shell ()
   (interactive)
-  (ansi-term "/bin/bash"))
+  (ansi-term "/bin/bash")
+  (term-line-mode))
 
 (defun my-eshell-prompt-function ()
   (concat (abbreviate-file-name (eshell/pwd)) " "
