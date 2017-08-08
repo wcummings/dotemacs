@@ -5,6 +5,8 @@
 (defvar *rcirc-last-message-time-file* "~/.emacs.d/.rcirc-last-message-time")
 (defvar *rcirc-last-message-time-initial* nil)
 
+
+
 (defcustom my-irc-mode-znc-host nil
   "ZNC host"
   :type '(string)
@@ -19,6 +21,8 @@
   "ZNC password"
   :type '(string)
   :group 'my-customizations)
+
+(setq rcirc-id-string "mIRC v6.35 Khaled Mardam-Bey")
 
 (setq irc-nick "wcummings")
 (setq rcirc-default-nick irc-nick)
