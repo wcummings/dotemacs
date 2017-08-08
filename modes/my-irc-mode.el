@@ -5,8 +5,6 @@
 (defvar *rcirc-last-message-time-file* "~/.emacs.d/.rcirc-last-message-time")
 (defvar *rcirc-last-message-time-initial* nil)
 
-
-
 (defcustom my-irc-mode-znc-host nil
   "ZNC host"
   :type '(string)
