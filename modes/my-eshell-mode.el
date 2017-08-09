@@ -78,4 +78,9 @@
 (setq password-cache t)
 (setq password-cache-expiry 3600)
 
+(add-hook 'eshell-banner-load-hook
+          '(lambda ()
+             (setq eshell-banner-message
+                   (concat (shell-command-to-string "fortune -s") "\n"))))
+
 (provide 'my-eshell-mode)
