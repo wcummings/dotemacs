@@ -8,6 +8,20 @@
 
 (setq eshell-aliases-file "~/.emacs.d/eshell.aliases")
 
+(defcustom igng-token nil
+  "Auth token for IGNG."
+  :type '(string)
+  :group 'my-customizations)
+
+(defcustom igng-gallery "dumpster"
+  "IGNG gallery."
+  :type '(string)
+  :group 'my-customizations)
+
+(defun eshell/igng-upload (path)
+  "Upload image at PATH to IGNG."
+  (shell-command (concat "~/.emacs.d/scripts/igng-upload.py --token " igng-token " --path " path " --gallery " igng-gallery)))
+
 (defun eshell/up (&optional n)
   (dotimes (i (or n 1)) (cd "..")))
 

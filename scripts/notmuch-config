@@ -1,9 +1,0 @@
-[database]
-path=/home/xo/mail
-
-[new]
-tags=unread;inbox
-ignore=
-
-[search]
-exclude_tags=deleted;spam
