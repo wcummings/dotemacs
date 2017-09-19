@@ -98,7 +98,10 @@
 (venv-initialize-eshell)
 (setq venv-location "~/.virtualenv/")
 
-(require 'my-wl)
+(setq gnus-select-method '(nntp "news.gwene.org"))
+
+(setq gnus-secondary-select-methods
+      '((nnimap "imap.fastmail.com")))
 
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
 
