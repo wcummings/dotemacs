@@ -83,6 +83,7 @@
 (require 'epoch-view)
 (require 'rotate-windows)
 (require 'multi-scratch)
+(require 'my-erc-mode)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)

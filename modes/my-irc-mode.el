@@ -6,17 +6,22 @@
 (defvar *rcirc-last-message-time-initial* nil)
 
 (defcustom my-irc-mode-znc-host nil
-  "ZNC host"
+  "ZNC host."
   :type '(string)
   :group 'my-customizations)
 
 (defcustom my-irc-mode-znc-port nil
-  "ZNC port"
+  "ZNC port."
   :type '(string)
   :group 'my-customizations)
 
 (defcustom my-irc-mode-znc-password nil
-  "ZNC password"
+  "ZNC password."
+  :type '(string)
+  :group 'my-customizations)
+
+(defcustom my-irc-mode-znc-username nil
+  "ZNC username."
   :type '(string)
   :group 'my-customizations)
 
@@ -121,7 +126,7 @@
 	       (string= capab "znc.in/playback"))
       (rcirc-send-privmsg process "*playback" (format "Play * %d" (+ *rcirc-last-message-time-initial* 1))))))
 
-(add-hook 'rcirc-receive-message-functions 'rcirc-do-notifications-hook)
+;;(add-hook 'rcirc-receive-message-functions 'rcirc-do-notifications-hook)
 
 (defun rcirc-do-notifications-hook (process cmd sender args text)
   (let ((target (car args))
