@@ -1,0 +1,25 @@
+From e58db9afef82957ffcea6a72977f5f2b4fb53d05 Mon Sep 17 00:00:00 2001
+From: Ryan Schuetzler <ryan@schuetzler.net>
+Date: Fri, 31 Oct 2014 17:32:06 -0700
+Subject: [PATCH] Allow multiple networks per user
+
+With ZNC version 1.0 or greater, you can connect one user to multiple
+networks using the password: "user/network:password". This patch
+provides that functionality using the network slug as the network name.
+---
+ znc.el | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/znc.el b/znc.el
+index b6e009f..087dd20 100755
+--- a/znc.el
++++ b/znc.el
+@@ -219,7 +219,7 @@ to the matching values for the endpoint"
+                  (let* ((buffer (znc-network-buffer-name slug))
+                         (erc-fun (if ssl znc-erc-ssl-connector znc-erc-connector))
+                         (erc-args `(:server ,host :port ,port
+-                                    :nick ,user :password ,(format "%s:%s" user pass)))
++                                    :nick ,user :password ,(format "%s/%s:%s" user slug pass)))
+                         (erc-buffer (apply erc-fun erc-args)))
+                    (when (get-buffer buffer)
+                      (znc-kill-buffer-always buffer))
