@@ -1,6 +1,7 @@
 (require 'eshell)
 (require 'em-smart)
 (require 'em-tramp)
+(require 'em-term)
 ;; (setq eshell-where-to-jump 'begin)
 ;; (setq eshell-review-quick-commands nil)
 ;; (setq eshell-smart-space-goes-to-end t)

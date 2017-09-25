@@ -19,7 +19,8 @@
                      paredit
                      virtualenvwrapper
                      projectile
-                     org-ehtml))
+                     org-ehtml
+                     znc))
 
 (package-initialize)
 (unless package-archive-contents

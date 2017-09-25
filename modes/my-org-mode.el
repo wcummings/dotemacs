@@ -31,7 +31,7 @@
 
 (git-sync-org)
 
-(defvar *enable-org-web-server* nil
+(defcustom *enable-org-web-server* nil
   "If true, start an org web interface."
   :type '(boolean)
   :group 'my-customizations)
