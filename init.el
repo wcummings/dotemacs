@@ -104,6 +104,13 @@
 (setq gnus-secondary-select-methods
       '((nnimap "imap.fastmail.com")))
 
+(setq message-send-mail-function 'smtpmail-send-it)
+
+(setq smtpmail-smtp-server "smtp.fastmail.com")
+(setq user-mail-address "will@wpc.io")
+(setq smtpmail-stream-type 'ssl)
+(setq smtpmail-smtp-service 465)
+
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
 
 (projectile-global-mode)
