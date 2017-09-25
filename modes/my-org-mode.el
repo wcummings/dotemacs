@@ -200,7 +200,7 @@ Published: %s
 (setq org-src-fontify-natively t)
 
 (when *enable-org-web-server*
-  (setq org-ehtml-docroot "~")
+  (setq org-ehtml-docroot (expand-file-name "~"))
   (setq org-ehtml-everything-editable t)
   (require 'org-ehtml)
   (ws-start org-ehtml-handler 8888))
