@@ -97,4 +97,6 @@
              (setq eshell-banner-message
                    (concat (shell-command-to-string "fortune -s") "\n"))))
 
+(add-to-list 'eshell-visual-commands "ssh")
+
 (provide 'my-eshell-mode)
