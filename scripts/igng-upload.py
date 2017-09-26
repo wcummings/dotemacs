@@ -25,8 +25,6 @@ def TokenTest(parser, args):
     if r.status_code == 401:
         raise parser.error(r_json['detail'])
 
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Upload an image to an iGNG server', prog="iGNG Uploader")
     parser.add_argument("--host", help="Select a different host", default="http://i.gng.io")
@@ -92,7 +90,8 @@ if __name__ == "__main__":
         files = {"original":f}
         gal_resp = requests.post(target_host + "/i/api/user/gallery/%s/upload/" % (gal_uuid,), headers=target_headers, files=files)
         if gal_resp.status_code == 201:
-            print "Single Image Uploaded!"
+            print target_host + gal_resp.json()['data']['full_url']
+            # print "Single Image Uploaded!"
         else:
             print "Upload Fail for %s" % args.path
 

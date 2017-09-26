@@ -21,7 +21,7 @@
 
 (defun eshell/igng-upload (path)
   "Upload image at PATH to IGNG."
-  (shell-command (concat "~/.emacs.d/scripts/igng-upload.py --token " igng-token " --path " path " --gallery " igng-gallery)))
+  (shell-command-to-string (concat "~/.emacs.d/scripts/igng-upload.py --token " igng-token " --path " path " --gallery " igng-gallery)))
 
 (defun eshell/up (&optional n)
   (dotimes (i (or n 1)) (cd "..")))
