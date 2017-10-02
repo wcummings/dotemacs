@@ -44,5 +44,13 @@
 ;;            :full-name nick
 ;;            :password password))))
 
+                                        ;(defun slack-complete-command  )
+
+(advice-add 'pcomplete-erc-nicks :around 'pcomplete-slack-nicks-advice)
+
+(defun pcomplete-slack-nicks-advice (origin-fun &rest args)
+  (let ((nicks (apply origin-fun args)))
+    (append nicks (mapcar (lambda (v) (concat "@" v)) nicks))))
+
 (provide 'my-erc-mode)
 

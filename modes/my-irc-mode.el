@@ -139,7 +139,7 @@
                                          (regexp-quote nick)
                                          "\\b")
                                  message)))
-      (message (format "Notify: %s" sender))
+      ;;(message (format "Notify: %s" sender))
       (notifications-notify :title sender :body message :replace-id sender))))
 
 (provide 'my-irc-mode)
