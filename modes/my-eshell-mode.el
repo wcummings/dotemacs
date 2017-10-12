@@ -96,7 +96,9 @@
 (add-hook 'eshell-banner-load-hook
           '(lambda ()
              (setq eshell-banner-message
-                   (concat (shell-command-to-string "fortune -s") "\n"))))
+                   (if (executable-find "fortune")
+                       (concat (shell-command-to-string "fortune -s") "\n")
+                     (concat "Welcome to the Emacs shell " user-login-name "\n\n")))))
 
 (add-to-list 'eshell-visual-commands "ssh")
 
