@@ -113,6 +113,7 @@
 
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
 
+(require 'go-projectile)
 (projectile-global-mode)
 
 (cd "~")

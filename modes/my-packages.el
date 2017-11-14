@@ -20,7 +20,8 @@
                      virtualenvwrapper
                      projectile
                      org-ehtml
-                     znc))
+                     znc
+                     go-projectile))
 
 (package-initialize)
 (unless package-archive-contents
