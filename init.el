@@ -43,6 +43,9 @@
 
 (setq chess-ics-server-list '(("freechess.org" 5000 "wcummings")))
 
+;; (setq split-height-threshold nil)
+;; (setq split-width-threshold 0)
+
 ;; https://github.com/dunn/company-emoji/blob/master/README.md
 (defun set-emoji-font (frame)
   (if (eq system-type 'darwin)
@@ -90,6 +93,7 @@
 (global-set-key (kbd "C-x 9") 'toggle-frame-maximized)
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x p") 'ace-window) ; M-p conflicts w/ magit
 
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
 
@@ -113,8 +117,8 @@
 
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
 
-(require 'go-projectile)
 (projectile-global-mode)
+(require 'go-projectile)
 
 (cd "~")
 (eshell) ;)

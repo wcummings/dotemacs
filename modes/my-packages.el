@@ -21,7 +21,8 @@
                      projectile
                      org-ehtml
                      znc
-                     go-projectile))
+                     go-projectile
+                     ace-window))
 
 (package-initialize)
 (unless package-archive-contents
