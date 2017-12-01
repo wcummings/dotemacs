@@ -7,7 +7,8 @@ $opml->head(title => 'Subscriptions');
 
 while(<>) {
     chomp;
-    $opml->add_outline(type => 'rss', xmlUrl => $_);
+    # $opml->add_outline(type => 'rss', xmlUrl => $_);
+    $opml->add_outline(type => 'rss', htmlUrl => $_);    
 }
 
 $opml->save('feeds.opml');
