@@ -19,4 +19,25 @@
 (setq smtpmail-stream-type 'ssl)
 (setq smtpmail-smtp-service 465)
 
+;; auto-complete emacs address using bbdb UI
+(add-hook 'message-mode-hook
+          '(lambda ()
+             (flyspell-mode t)
+             (local-set-key (kdb "TAB") 'bbdb-complete-name)))
+
+(defun slurp (file)
+  "Read FILE into a string."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (buffer-substring-no-properties
+     (point-min)
+     (point-max))))
+
+(defun gnus-import-feed-list (path)
+  "Import list of NNTP feeds from file at PATH."
+  (interactive "F")
+  (let ((feeds (split-string (slurp path) "\n" t)))
+    (cl-loop for feed in feeds
+             do (gnus-subscribe-group feed))))
+
 (provide 'my-gnus-mode)
