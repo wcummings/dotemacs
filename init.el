@@ -87,6 +87,7 @@
 (require 'rotate-windows)
 (require 'multi-scratch)
 (require 'my-erc-mode)
+(require 'my-gnus-mode)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)
@@ -102,18 +103,6 @@
 (require 'virtualenvwrapper)
 (venv-initialize-eshell)
 (setq venv-location "~/.virtualenv/")
-
-(setq gnus-select-method '(nntp "news.gwene.org"))
-
-(setq gnus-secondary-select-methods
-      '((nnimap "imap.fastmail.com")))
-
-(setq message-send-mail-function 'smtpmail-send-it)
-
-(setq smtpmail-smtp-server "smtp.fastmail.com")
-(setq user-mail-address "will@wpc.io")
-(setq smtpmail-stream-type 'ssl)
-(setq smtpmail-smtp-service 465)
 
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
 
