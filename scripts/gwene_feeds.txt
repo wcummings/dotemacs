@@ -45,7 +45,7 @@ gwene.com.bostonfrogpond
 gwene.com.feedburner.xconomy.boston
 gwene.edu.umb.blogs.archives
 gwene.com.wordpress.archivesintern
-gwene.com.wunderground.auto.rss.full.ma.boston
+gwene.com.wunderground.samara
 gwene.com.arrowstreet
 gwene.org.smams
 gwene.org.mydorchester.blog
@@ -270,7 +270,7 @@ gwene.org.datatherapy
 gwene.com.feedburner.jamaica.plain.gazette
 gwene.com.southbostontod
 gwene.com.northendwaterf
-gwene.com.quincyquarry
+gwene.com.quincyquarry.comments
 gwene.com.thebostoncalen.blog
 gwene.org.mapublichealth
 gwene.org.uumassaction
@@ -302,7 +302,6 @@ gwene.org.wgbh.news
 gwene.com.weebly.framwormbta
 gwene.com.bostononbudget
 gwene.info.transitmatters.blog
-gwene.com.blubrry.feeds.transitmatters
 gwene.org.massinc
 gwene.org.masspirg
 gwene.news.nenc
@@ -314,7 +313,7 @@ gwene.org.bluehill.observatory
 gwene.edu.northeastern.thedocket
 gwene.edu.northeastern.csshresearch.bostonarearese
 gwene.com.thetech
-gwene.org.cambridgehappe.api.papers.b2aba772-7680-.rss.type
+gwene.org.cambridgehappe.api.papers.b2aba772-7680-
 gwene.com.wordpress.codmancouncil
 gwene.org.masspeaceactio
 gwene.com.cambridgecivic
@@ -345,7 +344,6 @@ gwene.info.livablestreets.blog
 gwene.org.tcproject
 gwene.com.tumblr.artsmattapan
 gwene.com.artsmattapan
-gwene.com.artsmattapan.comments
 gwene.org.tuftsobserver
 gwene.org.ncaaa
 gwene.org.bmrb
@@ -358,10 +356,12 @@ gwene.co.onevan
 gwene.com.seenaroundbost
 gwene.com.randolphpd
 gwene.org.bostonopportun
-gwene.com.drewdevault
+gwene.io.github.sircmpwn
 gwene.org.bostonnaacp
-gwene.com.talkingpointsm
+gwene.com.tpm
 gwene.com.foreignpolicy
-gwene.com.blogspot.milesonthembta
+gwene.com.feedburner.miles.on.the.mbta
 gwene.com.n-gate
 gwene.com.haaretz.cmlink
+gwene.org.dreamwidth.davis-square.data
+gwene.org.groundworksome

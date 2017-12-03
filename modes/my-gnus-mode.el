@@ -1,3 +1,5 @@
+(require 'gnus)
+
 (defun my-gnus-group-list-subscribed-groups ()
   "List all subscribed groups with or without un-read messages"
   (interactive)
