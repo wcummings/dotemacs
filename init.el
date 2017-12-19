@@ -99,7 +99,9 @@
   (global-set-key (kbd "C-x w")
                   (lambda ()
                     (interactive)
-                    (ansi-term "wicd-curses"))))
+                    (if (get-buffer "*wicd*")
+                        (switch-to-buffer "*wicd*")
+                      (ansi-term "wicd-curses" "wicd")))))
 
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
 
