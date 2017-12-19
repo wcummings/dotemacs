@@ -367,3 +367,4 @@ http://n-gate.com/index.rss
 http://www.haaretz.com/cmlink/1.263335
 https://davis-square.dreamwidth.org/data/rss
 http://www.groundworksomerville.org/feed/
+https://www.reddit.com/r/programmingcirclejerk/.rss
