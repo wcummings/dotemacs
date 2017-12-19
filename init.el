@@ -95,6 +95,11 @@
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x p") 'ace-window) ; M-p conflicts w/ magit
+(when (executable-find "wicd-curses")
+  (global-set-key (kbd "C-x w")
+                  (lambda ()
+                    (interactive)
+                    (ansi-term "wicd-curses"))))
 
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
 
@@ -108,6 +113,8 @@
 
 (projectile-global-mode)
 (require 'go-projectile)
+
+(setq-default c-basic-offset 4)
 
 (cd "~")
 (eshell) ;)
