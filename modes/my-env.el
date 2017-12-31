@@ -17,5 +17,6 @@
 (add-to-path "~/.emacs.d/scripts")
 (add-to-path "~/.cargo/bin")
 (add-to-path "~/.rakudobrew/bin")
+;;(setenv "GOPATH" (concat (getenv "HOME") "/go"))
 
 (provide 'my-env)
