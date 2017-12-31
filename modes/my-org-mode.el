@@ -95,7 +95,6 @@
 :RSS_PERMALINK: %s
 :END:
 %s\\\\
-\\\\
 Last update: %s\\\\
 Published: %s
 "
@@ -135,7 +134,7 @@ Published: %s
 (defun my-org-get-keyword (keyword)
   (cdr (assoc keyword (my-org-get-keywords))))
 
-(defun org-mode-blog-prepare (project-plist)
+(defun my-org-mode-blog-prepare ()
   "`index.org' should always be exported so touch the file before publishing."
   (let* ((base-directory (plist-get project-plist :base-directory))
          (buffer (find-file-noselect (expand-file-name "index.org" base-directory) t)))
@@ -165,7 +164,7 @@ Published: %s
          :html-link-home ,blog-home-link
          :html-link-up ,blog-home-link
          :recursive t
-         :preparation-function org-mode-blog-prepare
+         :preparation-function my-org-mode-blog-prepare
          :html-preamble ,my-html-preamble
          :html-postamble nil)
         ("blog-styles"
