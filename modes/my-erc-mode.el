@@ -44,13 +44,19 @@
 ;;            :full-name nick
 ;;            :password password))))
 
-                                        ;(defun slack-complete-command  )
-
 (advice-add 'pcomplete-erc-nicks :around 'pcomplete-slack-nicks-advice)
 
 (defun pcomplete-slack-nicks-advice (origin-fun &rest args)
   (let ((nicks (apply origin-fun args)))
     (append nicks (mapcar (lambda (v) (concat "@" v)) nicks))))
 
-(provide 'my-erc-mode)
+(defvar my-erc-version "mIRC Version 7.0")
 
+(defun my-erc-ctcp-query-VERSION (_proc nick _login _host _to _msg)
+  "Send CTCP response to NICK."
+  (erc-send-ctcp-notice nick (concat "VERSION " my-erc-version)) nil)
+
+(setf erc-disable-ctcp-replies t)
+(add-hook 'erc-ctcp-query-VERSION-hook 'my-erc-ctcp-query-VERSION)
+
+(provide 'my-erc-mode)
