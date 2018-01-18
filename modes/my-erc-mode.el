@@ -59,4 +59,8 @@
 (setf erc-disable-ctcp-replies t)
 (add-hook 'erc-ctcp-query-VERSION-hook 'my-erc-ctcp-query-VERSION)
 
+(defun erc-cmd-SLAP (nick)
+  "mIRC is the greatest IRC client."
+  (erc-send-action (erc-default-target) (format "slaps %s around a bit with a large trout" nick)))
+
 (provide 'my-erc-mode)
