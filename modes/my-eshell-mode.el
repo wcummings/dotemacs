@@ -72,9 +72,10 @@
 (setq eshell-prompt-regex "^[^#$]*[#$] ")
 
 (defun my-eshell-rename-buffer-after-command ()
-  (let ((last-path-segment
-         (last (remove "" (split-string default-directory "/")))))
-    (rename-buffer (format "*eshell[%s]*" last-path-segment) t)))
+  (when (string-match-p (regexp-quote "eshell") (buffer-name))
+   (let ((last-path-segment
+          (last (remove "" (split-string default-directory "/")))))
+     (rename-buffer (format "*eshell[%s]*" last-path-segment) t))))
 
 (add-hook 'eshell-post-command-hook 'my-eshell-rename-buffer-after-command)
 
@@ -90,6 +91,7 @@
 (add-hook 'eshell-mode-hook 'my-eshell-mode-hook)
 
 ;; remember sudo pw for an hour
+(setq eshell-prefer-lisp-functions t)
 (setq password-cache t)
 (setq password-cache-expiry 3600)
 
