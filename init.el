@@ -95,13 +95,6 @@
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x p") 'ace-window) ; M-p conflicts w/ magit
-(when (executable-find "wicd-curses")
-  (global-set-key (kbd "C-x w")
-                  (lambda ()
-                    (interactive)
-                    (if (get-buffer "*wicd*")
-                        (switch-to-buffer "*wicd*")
-                      (ansi-term "wicd-curses" "wicd")))))
 
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
 
@@ -109,7 +102,7 @@
 
 (require 'virtualenvwrapper)
 (venv-initialize-eshell)
-(setq venv-location "~/.virtualenv/")
+(setq venv-location "~/.virtualenvs/")
 
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
 
