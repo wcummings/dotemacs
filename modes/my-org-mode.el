@@ -31,11 +31,6 @@
 
 (git-sync-org)
 
-(defcustom *enable-org-web-server* nil
-  "If true, start an org web interface."
-  :type '(boolean)
-  :group 'my-customizations)
-
 (defcustom my-org-mode-gcal-private-url nil
   "URL to fetch .ics from gmail"
   :type '(string)
@@ -198,11 +193,9 @@ Published: %s
 
 (setq org-src-fontify-natively t)
 
-(when *enable-org-web-server*
-  (setq org-ehtml-docroot (expand-file-name "~"))
-  (setq org-ehtml-everything-editable t)
-  (require 'org-ehtml)
-  (ws-start org-ehtml-handler 8888))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
 
 (provide 'my-org-mode)
 
