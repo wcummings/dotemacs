@@ -1,0 +1,3 @@
+[submodule "ircart"]
+	path = ircart
+	url = https://github.com/ircart/ircart.git
