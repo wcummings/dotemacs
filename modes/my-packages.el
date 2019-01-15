@@ -11,10 +11,10 @@
 		     php-mode
 		     go-mode
 		     lua-mode
-		     misc-cmds
+		     ;; misc-cmds
 		     chess
 		     rainbow-delimiters
-                     flycheck
+                     ;; flycheck
                      restclient
                      paredit
                      virtualenvwrapper
@@ -22,7 +22,8 @@
                      org-ehtml
                      znc
                      go-projectile
-                     ace-window))
+                     ace-window
+                     sx))
 
 (package-initialize)
 (unless package-archive-contents

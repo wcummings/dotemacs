@@ -88,6 +88,7 @@
 (require 'multi-scratch)
 (require 'my-erc-mode)
 (require 'my-gnus-mode)
+(require 'my-python-mode)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x n") 'rotate-windows)
@@ -95,9 +96,13 @@
 (global-set-key (kbd "C-x 5") 'kill-buffer-and-its-windows)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x p") 'ace-window) ; M-p conflicts w/ magit
+(global-set-key (kbd "C-x d") 'sx-search)
 
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
 
+;; (require 'flycheck)
+;; use my version of flycheck which includes support for mypy
+(load "~/.emacs.d/lib/flycheck/flycheck.el")
 (global-flycheck-mode)
 
 (require 'virtualenvwrapper)
@@ -110,6 +115,9 @@
 (require 'go-projectile)
 
 (setq-default c-basic-offset 4)
+
+(defalias 'open 'find-file)
+(defalias 'openo 'find-file-other-window)
 
 (cd "~")
 (eshell) ;)

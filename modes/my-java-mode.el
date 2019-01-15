@@ -9,4 +9,3 @@
   (shell-command "open -a 'IntelliJ IDEA CE'"))
 
 (provide 'my-java-mode)
-

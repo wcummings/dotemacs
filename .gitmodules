@@ -1,3 +1,6 @@
 [submodule "ircart"]
 	path = ircart
 	url = https://github.com/ircart/ircart.git
+[submodule "lib/flycheck"]
+	path = lib/flycheck
+	url = git@github.com:willcummings/flycheck.git
