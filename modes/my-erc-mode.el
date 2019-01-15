@@ -63,4 +63,28 @@
   "mIRC is the greatest IRC client."
   (erc-send-action (erc-default-target) (format "slaps %s around a bit with a large trout" nick)))
 
+(defun erc-cmd-CATFILE (path)
+  (dolist (line (slurp path) value)
+    (erc-send-message line)))
+
+(defun slurp (path)
+  (with-temp-buffer
+    (insert-file-contents path)
+    (split-string (buffer-string) "\n" t)))
+
+(defcustom my-erc-mode-floodable-channels '("#trusted")
+  "List of channels which allow flooding."
+  :type '(string)
+  :group 'my-customizations)
+
+(add-hook 'erc-mode-hook
+          (lambda ()
+            (when (member (buffer-name) my-erc-mode-floodable-channels)
+              (make-local-variable 'erc-server-flood-penalty)
+              (setq erc-server-flood-penalty 0))))
+
+(defun bwm-make-buffer-floodable ()
+  (make-local-variable 'erc-server-flood-penalty)
+  (setq erc-server-flood-penalty 0))
+
 (provide 'my-erc-mode)
