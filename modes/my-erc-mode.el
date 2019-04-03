@@ -87,4 +87,19 @@
   (make-local-variable 'erc-server-flood-penalty)
   (setq erc-server-flood-penalty 0))
 
+(defun erc-cmd-MEMEIFY (&rest args)
+  (erc-send-message (memeify (mapconcat 'identity args " "))))
+
+(defun memeify (s)
+  (mapconcat 
+   'identity
+   (-map-indexed
+    (lambda (i c)
+      (if (equal (% i 2) 0)
+          (upcase c)
+        (downcase c)))
+    (split-string s ""))
+   ""))
+
+
 (provide 'my-erc-mode)
