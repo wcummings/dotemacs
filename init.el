@@ -112,12 +112,16 @@
 (define-key lisp-interaction-mode-map (kbd "C-i") 'eval-print-last-sexp)
 
 (projectile-global-mode)
+(setq projectile-project-search-path '("~/development"))
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (require 'go-projectile)
 
 (setq-default c-basic-offset 4)
 
 (defalias 'open 'find-file)
 (defalias 'openo 'find-file-other-window)
+
+(pyenv-mode)
 
 (cd "~")
 (eshell) ;)

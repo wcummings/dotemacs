@@ -23,7 +23,8 @@
                      znc
                      go-projectile
                      ace-window
-                     sx))
+                     sx
+                     pyenv-mode))
 
 (package-initialize)
 (unless package-archive-contents
